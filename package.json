@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "Music Media Web App",
   "main": "index.js",
-  "dependencies": {},
+  "dependencies": {
+    "express": "^4.15.4"
+  },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
