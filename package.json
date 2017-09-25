@@ -1,0 +1,21 @@
+{
+  "name": "musicmedia",
+  "version": "1.0.0",
+  "description": "Music Media Web App",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/trilxs/MusicMediaWebApp.git"
+  },
+  "author": "Minh Lu, Tam Lu",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/trilxs/MusicMediaWebApp/issues"
+  },
+  "homepage": "https://github.com/trilxs/MusicMediaWebApp#readme"
+}
