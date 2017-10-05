@@ -1,8 +1,9 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
-registerServiceWorker();
+/* React DOM's whole purpose is to make sure React can be rendered on the DOM */
+import ReactDOM from 'react-dom';
+
+import App from './components/App';
+
+/* Param1: Root React component instance, Param2: index.html reference that hosts these components */
+ReactDOM.render(<App />, document.querySelector('#root'));
