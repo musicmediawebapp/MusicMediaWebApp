@@ -3,8 +3,8 @@ var express = require('express');
 var app = express();
 
 /* Dummy router example */
-app.get('/', (req, res) => {
-    res.send({ hi: 'there' });
+app.get('/api/test', (req, res) => {
+    res.send({ test: 'test' });
 });
 
 /* Instruct Express to listen to this port */

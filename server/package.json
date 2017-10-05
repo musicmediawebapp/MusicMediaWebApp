@@ -8,11 +8,15 @@
     "npm": "5.0.3"
   },
   "dependencies": {
+    "concurrently": "^3.5.0",
     "express": "^4.15.4"
   },
   "devDependencies": {},
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "server": "node index.js",
+    "client": "npm run start --prefix ../client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "repository": {
     "type": "git",
