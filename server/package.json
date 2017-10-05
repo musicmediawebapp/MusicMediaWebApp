@@ -3,12 +3,16 @@
   "version": "1.0.0",
   "description": "Music Media Web App",
   "main": "index.js",
+  "engines": {
+    "node": "8.1.1",
+    "npm": "5.0.3"
+  },
   "dependencies": {
     "express": "^4.15.4"
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
