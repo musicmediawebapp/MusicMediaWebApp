@@ -8,4 +8,4 @@ app.get('/', (req, res) => {
 });
 
 /* Instruct Express to listen to this port */
-app.listen(5000);
+app.listen(process.env.PORT || 5000);
