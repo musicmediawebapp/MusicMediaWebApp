@@ -8,7 +8,8 @@ passport.use(
     new GoogleStrategy({
         clientID: keys.googleClientID,
         clientSecret: keys.googleClientSecret,
-        callbackURL: '/auth/google/callback'
+        callbackURL: '/auth/google/callback',
+        proxy: true
     }, (accessToken, refreshToken, profile, done) => {
         // Once the user has OAuth'ed with Google, we retrieve the access token and save them as a User model in our DB
         User.findOne({ googleId: profile.id })
