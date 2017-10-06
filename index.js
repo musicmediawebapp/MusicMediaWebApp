@@ -30,12 +30,5 @@ authRoutes(app);
 /* MongoDB set up */
 mongoose.connect(keys.mongoURI);
 
-/* Dummy router example */
-app.get('/api/test', async (req, res) => {
-    var user = await User.findOne({ googleId: 123 }); // NOTE: broken
-
-    res.send({ user });
-});
-
 /* Instruct Express to listen to this port */
 app.listen(process.env.PORT || 5000);
