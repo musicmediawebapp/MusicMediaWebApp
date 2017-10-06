@@ -1,6 +1,6 @@
 /* Model imports */
 require('./models/user');
-var keys = require('../config/keys');
+var keys = require('./config/keys');
 var mongoose = require('mongoose');
 var User = mongoose.model('users');
 var cookieSession = require('cookie-session');
