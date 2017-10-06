@@ -2,7 +2,7 @@ import React from 'react';
 
 var App = () => {
     return (
-        <a href="/api/test">
+        <a>
             Click here for test response from Express backend
         </a>
     );

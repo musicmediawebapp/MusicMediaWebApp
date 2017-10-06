@@ -1,6 +1,6 @@
 /* Model imports */
 require('./models/user');
-var keys = require('../config/keys');
+var keys = require('./config/keys');
 var mongoose = require('mongoose');
 var User = mongoose.model('users');
 var cookieSession = require('cookie-session');
@@ -30,12 +30,19 @@ authRoutes(app);
 /* MongoDB set up */
 mongoose.connect(keys.mongoURI);
 
-/* Dummy router example */
-app.get('/api/test', async (req, res) => {
-    var user = await User.findOne({ googleId: 123 }); // NOTE: broken
+if (process.env.NODE_ENV === 'production') {
+    // Express will serve up the main.js or main.css files when they're QUERIED from the front-end
+    app.use(express.static('client/build'));
 
-    res.send({ user });
-});
+    // If there was no specific request for a file...
+
+    // Express will serve up the index.html if it doesn't recognize the front-end route
+    // (Kick user to the index.html which loads up React)
+    var path = require('path');
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(_dirname, 'client', 'build', 'index.html'));
+    });
+}
 
 /* Instruct Express to listen to this port */
 app.listen(process.env.PORT || 5000);
