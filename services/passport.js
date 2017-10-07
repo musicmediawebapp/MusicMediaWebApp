@@ -10,18 +10,15 @@ passport.use(
         clientSecret: keys.googleClientSecret,
         callbackURL: '/auth/google/callback',
         proxy: true
-    }, (accessToken, refreshToken, profile, done) => {
+    }, async (accessToken, refreshToken, profile, done) => {
         // Once the user has OAuth'ed with Google, we retrieve the access token and save them as a User model in our DB
-        User.findOne({ googleId: profile.id })
-            .then((existingUser) => {
-                if (existingUser) {
-                    done(null, existingUser); // Tells passport we're done w/ this user model
-                }
-                else {
-                    new User({ googleId: profile.id }).save()
-                        .then(user => done(null, user));                    
-                }
-            })
+        var existingUser = await User.findOne({ googleId: profile.id });
+
+        if (existingUser) {
+            return done(null, existingUser); // Tells passport we're done w/ this user model
+        }
+        var user = new User({ googleId: profile.id }).save();
+        done(null, user);                    
     })
 );
 
