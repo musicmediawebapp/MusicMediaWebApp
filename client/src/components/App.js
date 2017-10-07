@@ -5,9 +5,9 @@ import * as actions from '../actions';
 
 // Component imports
 import Header from './Header'; // Will always show this header
+import Landing from './Landing'; // Below header in the front page
 
 var Dashboard = () => <h2>Dashboard</h2> // Once logged in
-var Landing = () => <h2>Landing</h2> // Note: when user goes to our site, this is below the header
 
 class App extends Component {
     componentDidMount() {
