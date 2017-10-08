@@ -1,13 +1,13 @@
-*DEBUGGING*
+# DEBUGGING
 
-*How to debug the front-end:*
+## How to debug the front-end:
 1) Install React Devtools (Chrome extension)
 2) In the browser, turn to the React tab
 3) You can see the JSX component structure. Here, you can type in $r on the selected element to inspect its values
 4) You can also change the props, states and so forth
 5) You can also set breakpoints from within the Source tab
 
-*How to debug the backend:*
+## How to debug the backend:
 
 You can use the V8 Inspector tool to debug the Express routes but that won't do you much good. There is no point in creating dummy data to test a route -- it's not a real, full test and it has room for user error.
 
