@@ -28,19 +28,8 @@ app.use(passport.session());
 
 authRoutes(app);
 
-/* SQL CONNECTION */
+/* SQL connection */
 var connection = db.handleDisconnect();
-
-/* SQL TEST */
-app.get('/api/sql', (req, res) => {
-
-    connection.query("SELECT * FROM customers", function (err, result, fields) {
-        if (err) throw err;
-        console.log(result[0]);
-        res.send(result[0].name);
-      });
-});
-
 
 /* MongoDB set up */
 mongoose.connect(keys.mongoURI, { useMongoClient: true });
