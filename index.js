@@ -5,7 +5,7 @@ var mongoose = require('mongoose');
 var User = mongoose.model('users');
 var cookieSession = require('cookie-session');
 var passport = require('passport');
-var mysql = require('mysql');
+var db = require('./config/db-connection');
 
 /* Service imports */
 require('./services/passport');
@@ -29,17 +29,12 @@ app.use(passport.session());
 authRoutes(app);
 
 /* SQL CONNECTION */
-var con = mysql.createConnection({
-    host: "us-cdbr-iron-east-05.cleardb.net",
-    user: "bbee8711fef71a",
-    password: "2446be25",
-    database: "heroku_84ba6e9121f2089"
-  });
+var connection = db.handleDisconnect();
 
 /* SQL TEST */
 app.get('/api/sql', (req, res) => {
 
-    con.query("SELECT * FROM customers", function (err, result, fields) {
+    connection.query("SELECT * FROM customers", function (err, result, fields) {
         if (err) throw err;
         console.log(result[0]);
         res.send(result[0].name);
