@@ -5,12 +5,13 @@ var queries = require('./queries');
 var connection;
 module.exports = {
     /* Inserts a given user model given by Google OAuth */
-    insertUser: function(user) {
+    insertUser: function(user, callback) {
         this.tryConnect().getConnection(function(err, con) {
             var sql = queries.insertUser;
             con.query(sql, [user.id, user.gender, user.name.givenName, user.name.familyName, user.emails[0].value], function (err, result) {
                 con.release();
                 if (err) throw err;
+                callback(result.insertId);
             });
         });
     },
@@ -23,7 +24,7 @@ module.exports = {
                 con.release();
                 if (err) throw err;
                 // Call the callback function in the caller of this method so we can do something with this "result"
-                return callback(result);
+                return callback(result); // [] if not found
             });
         });
     },
@@ -36,7 +37,7 @@ module.exports = {
                 con.release();
                 if (err) throw err;
                 // Call the callback function in the caller of this method so we can do something with this "result"
-                return callback(result);
+                return callback(result); // [] if not found
             });
         });
     },
@@ -77,7 +78,7 @@ module.exports = {
             }
         });
 
-        console.log("NEW CONNECTION");
+        console.log("New connection");
         return connection;
     }
 }
