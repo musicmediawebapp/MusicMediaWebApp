@@ -12,6 +12,7 @@ passport.use(
     }, async (accessToken, refreshToken, profile, done) => {
         // Once the user has OAuth'ed with Google, we retrieve the access token
 
+
         dbService.getUserByGoogleID(profile.id, function(result) {
             // If we've found the user via googleID, then she's already OAuthed.
             //if (result[0]) {

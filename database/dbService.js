@@ -7,8 +7,7 @@ module.exports = {
     /* Inserts a given user model given by Google OAuth */
     insertUser: function(user) {
         this.tryConnect().getConnection(function(err, con) {
-            var sql = `INSERT INTO user (GoogleID, Gender, FirstName, LastName, Email) 
-                       VALUES (?, ?, ?, ?, ?)`;
+            var sql = queries.insertUser;
             con.query(sql, [user.id, user.gender, user.name.givenName, user.name.familyName, user.emails[0].value], function (err, result) {
                 con.release();
                 if (err) throw err;
