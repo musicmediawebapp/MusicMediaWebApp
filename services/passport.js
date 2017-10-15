@@ -17,8 +17,10 @@ passport.use(
                 console.log(result[0]);
                 return done(null, result[0]);                
             }
-            // If the user isn't OAuthed yet, save the User model to our DB
-            
+            // If the user isn't OAuthed yet, insert the User model to our DB
+            else {
+                
+            }
         });
         // dbService.insertUser(profile, function(result) {
         //     console.log(result);

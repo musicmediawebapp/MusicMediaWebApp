@@ -1,11 +1,11 @@
+/* This maps to the "user" table in our database */
 module.exports = class User {
     constructor(dbUser) {
-        this.ID = dbUser.ID; // Unique primary key from our database
-        this.googleID = dbUser.googleID;
+        this.googleID = dbUser.id;
         this.gender = dbUser.gender;
-        this.firstName = dbUser.firstName;
-        this.lastName   = dbUser.lastName;
-        this.email = dbUser.email;
-        this.isProfileSetUp = dbUser.isProfileSetUp;
+        this.firstName = dbUser.name.givenName;
+        this.lastName   = dbUser.name.familyName;
+        this.email = dbUser.emails[0].value; // We arbitrarily retrieve the first email. Upon set up, user can change this.
+                                            // It's only when we OAuth a new user that we set this.
     }
 }
