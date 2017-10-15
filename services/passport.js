@@ -10,18 +10,19 @@ passport.use(
         callbackURL: '/auth/google/callback',
         proxy: true
     }, async (accessToken, refreshToken, profile, done) => {
-        // Once the user has OAuth'ed with Google, we retrieve the access token
-
 
         dbService.getUserByGoogleID(profile.id, function(result) {
             // If we've found the user via googleID, then she's already OAuthed.
-            //if (result[0]) {
+            if (result && result.length != 0 && result[0]) {
                 console.log(result[0]);
                 return done(null, result[0]);                
-            //}
+            }
             // If the user isn't OAuthed yet, save the User model to our DB
             
         });
+        // dbService.insertUser(profile, function(result) {
+        //     console.log(result);
+        // });
     })
 );
 
@@ -35,8 +36,9 @@ passport.serializeUser((user, done) => {
 });
 
 // ID --> User
+// All incoming requests to the server will have access to the req.user because of this deserialization
 passport.deserializeUser((ID, done) => {
     dbService.getUserByID(ID, function(result) {        
         done(null, result[0]);                    
-    });  
+    });
 });

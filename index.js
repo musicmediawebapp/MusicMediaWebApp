@@ -1,5 +1,4 @@
 /* Model imports */
-require('./models/user');
 var keys = require('./config/keys');
 var cookieSession = require('cookie-session');
 var passport = require('passport');
