@@ -32,9 +32,7 @@ module.exports = {
     /* Retrieves a User model by ID */
     getUserByID: function(ID, callback) {
         this.tryConnect().getConnection(function(err, con) {
-            var sql = `SELECT * 
-                       FROM user 
-                       WHERE ID = ?`;
+            var sql = queries.getUserByID;
             con.query(sql, ID, function (err, result) {
                 con.release();
                 if (err) throw err;
