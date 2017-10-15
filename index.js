@@ -5,7 +5,7 @@ var mongoose = require('mongoose');
 var User = mongoose.model('users');
 var cookieSession = require('cookie-session');
 var passport = require('passport');
-var db = require('./config/db-connection');
+var db = require('./database/queries');
 
 /* Service imports */
 require('./services/passport');
@@ -29,7 +29,7 @@ app.use(passport.session());
 authRoutes(app);
 
 /* SQL connection */
-var connection = db.tryConnect();
+db.tryConnect();
 
 /* MongoDB set up */
 mongoose.connect(keys.mongoURI, { useMongoClient: true });

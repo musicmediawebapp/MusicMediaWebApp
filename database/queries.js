@@ -1,22 +1,26 @@
 var mysql = require('mysql');
-var keys = require('./keys');
+var keys = require('../config/keys');
 
 var connection;
 module.exports = {
     tryConnect: function() {
         // Singleton: if connection is already established, return it
-        if (connection) return connection;
+        if (connection) {
+            console.log("Getting connection...already made");
+            return connection;
+        }
 
-        // Otherwise, recreate the connection since the old one cannot be reused
-        var connection = mysql.createConnection({
+        // Otherwise, recreate the connection since the old one cannot be reused (due to either errors or upon initial app start-up)
+        connection = mysql.createPool({
+            connectionLimit: 100,
             host: keys.mySQLHost,
             user: keys.mySQLUser,
             password: keys.mySQLPassword,
             database: keys.mySQLDatabaseName
         });
-    
-        // The server is either starting or restarting
-        connection.connect(function(err) {
+
+        // Attempt to re-connect. If not, log errors and recall this method
+        connection.getConnection(function(err) {
             if (err) {
                 console.log('Error when connecting to db:', err);
                 setTimeout(handleDisconnect, 2000); // We introduce a delay before attempting to reconnect,
@@ -35,7 +39,17 @@ module.exports = {
             }
         });
 
-        // Either the first connection or a restart of the server
+        console.log("NEW CONNECTION");
         return connection;
+    },
+
+    insertUser: function() {
+        this.tryConnect().getConnection(function(err, con) {
+            var sql = "INSERT INTO customers (name, address) VALUES ('Tam asf', 'Booty 45')";
+            con.query(sql, function (err, result) {
+              if (err) throw err;
+              console.log("1 record inserted");
+            });
+        });
     }
 }
