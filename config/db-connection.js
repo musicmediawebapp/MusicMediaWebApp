@@ -1,10 +1,13 @@
 var mysql = require('mysql');
 var keys = require('./keys');
 
+var connection;
 module.exports = {
+    tryConnect: function() {
+        // Singleton: if connection is already established, return it
+        if (connection) return connection;
 
-    handleDisconnect: function() {
-        // Recreate the connection since the old one cannot be reused
+        // Otherwise, recreate the connection since the old one cannot be reused
         var connection = mysql.createConnection({
             host: keys.mySQLHost,
             user: keys.mySQLUser,
@@ -32,9 +35,7 @@ module.exports = {
             }
         });
 
-        // When we successfully connect to the database server, return it so other files can write queries
+        // Either the first connection or a restart of the server
         return connection;
     }
 }
-
-

@@ -3,6 +3,7 @@ var GoogleStrategy = require('passport-google-oauth20').Strategy;
 var keys = require('../config/keys');
 var mongoose = require('mongoose');
 var User = mongoose.model('users');
+var db = require('../config/db-connection');
 
 passport.use(
     new GoogleStrategy({

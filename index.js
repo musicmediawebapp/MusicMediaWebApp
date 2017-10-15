@@ -29,7 +29,7 @@ app.use(passport.session());
 authRoutes(app);
 
 /* SQL connection */
-var connection = db.handleDisconnect();
+var connection = db.tryConnect();
 
 /* MongoDB set up */
 mongoose.connect(keys.mongoURI, { useMongoClient: true });
