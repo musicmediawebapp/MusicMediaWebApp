@@ -3,7 +3,7 @@ require('./models/user');
 var keys = require('./config/keys');
 var cookieSession = require('cookie-session');
 var passport = require('passport');
-var db = require('./database/queries');
+var dbService = require('./database/dbService');
 
 /* Service imports */
 require('./services/passport');
@@ -27,7 +27,7 @@ app.use(passport.session());
 authRoutes(app);
 
 /* SQL connection */
-db.tryConnect();
+dbService.tryConnect();
 
 if (process.env.NODE_ENV === 'production') {
     // Express will serve up the main.js or main.css files when they're QUERIED from the front-end

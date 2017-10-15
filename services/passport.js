@@ -1,7 +1,7 @@
 var passport = require('passport');
 var GoogleStrategy = require('passport-google-oauth20').Strategy;
 var keys = require('../config/keys');
-var db = require('../database/queries');
+var dbService = require('../database/dbService');
 
 passport.use(
     new GoogleStrategy({
@@ -12,11 +12,12 @@ passport.use(
     }, async (accessToken, refreshToken, profile, done) => {
         // Once the user has OAuth'ed with Google, we retrieve the access token
 
-        db.getUserByGoogleID(profile.id, function(result) {
+        dbService.getUserByGoogleID(profile.id, function(result) {
             // If we've found the user via googleID, then she's already OAuthed.
-            if (result[0]) {
+            //if (result[0]) {
+                console.log(result[0]);
                 return done(null, result[0]);                
-            }
+            //}
             // If the user isn't OAuthed yet, save the User model to our DB
             
         });
@@ -34,7 +35,7 @@ passport.serializeUser((user, done) => {
 
 // ID --> User
 passport.deserializeUser((ID, done) => {
-    db.getUserByID(ID, function(result) {        
+    dbService.getUserByID(ID, function(result) {        
         done(null, result[0]);                    
     });  
 });

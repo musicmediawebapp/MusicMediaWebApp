@@ -30,6 +30,7 @@ module.exports = {
         });
     },
 
+    /* Retrieves a User model by ID */
     getUserByID: function(ID, callback) {
         this.tryConnect().getConnection(function(err, con) {
             var sql = `SELECT * 
