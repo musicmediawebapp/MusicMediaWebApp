@@ -51,5 +51,15 @@ module.exports = {
               console.log("1 record inserted");
             });
         });
+    },
+
+    getUser: function(callback) {
+        this.tryConnect().getConnection(function(err, con) {
+            var sql = "SELECT * FROM customers";
+            con.query(sql, function (err, result) {
+              if (err) throw err;
+              return callback(result);
+            });
+        });
     }
 }

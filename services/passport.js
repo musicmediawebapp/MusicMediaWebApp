@@ -15,7 +15,9 @@ passport.use(
         // Once the user has OAuth'ed with Google, we retrieve the access token and save them as a User model in our DB
         var existingUser = await User.findOne({ googleId: profile.id });
 
-        db.insertUser();
+        db.getUser(function(result) {
+            console.log(result);
+        });
 
         
         if (existingUser) {
