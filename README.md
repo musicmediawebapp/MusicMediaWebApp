@@ -1,3 +1,20 @@
+# MUSIC MEDIA STRUCTURE
+
+## Client
+Everything within the client directory is the front-end resources (including React, Redux). This serves as the UI for our web application.
+
+## Config
+The config folder stores all of our configurations, both for development and production.
+
+## Models
+The models for our middle-tier.
+
+## Routes
+The routes folder has all of the backend Express route handling. Whenever a user routes around our application with data requests,Express will retrieve said requests from the database.
+
+## Services
+These are helpers like our OAuth system.
+
 # DEBUGGING
 
 ## How to debug the front-end:
