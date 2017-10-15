@@ -3,6 +3,47 @@ var keys = require('../config/keys');
 
 var connection;
 module.exports = {
+    /* Inserts a given user model given by Google OAuth */
+    insertUser: function(user) {
+        this.tryConnect().getConnection(function(err, con) {
+            var sql = `INSERT INTO user (GoogleID, Gender, FirstName, LastName, Email) 
+                       VALUES (?, ?, ?, ?, ?)`;
+            con.query(sql, [user.id, user.gender, user.name.givenName, user.name.familyName, user.emails[0].value], function (err, result) {
+                con.release();
+                if (err) throw err;
+            });
+        });
+    },
+
+    /* Retrieves a User model by GoogleID */
+    getUserByGoogleID: function(googleID, callback) {
+        this.tryConnect().getConnection(function(err, con) {
+            var sql = `SELECT * 
+                       FROM user 
+                       WHERE GoogleID = ?`;
+            con.query(sql, googleID, function (err, result) {
+                con.release();
+                if (err) throw err;
+                // Call the callback function in the caller of this method so we can do something with this "result"
+                return callback(result);
+            });
+        });
+    },
+
+    getUserByID: function(ID, callback) {
+        this.tryConnect().getConnection(function(err, con) {
+            var sql = `SELECT * 
+                       FROM user 
+                       WHERE ID = ?`;
+            con.query(sql, ID, function (err, result) {
+                con.release();
+                if (err) throw err;
+                // Call the callback function in the caller of this method so we can do something with this "result"
+                return callback(result);
+            });
+        });
+    },
+
     tryConnect: function() {
         // Singleton: if connection is already established, return it
         if (connection) {
@@ -41,25 +82,5 @@ module.exports = {
 
         console.log("NEW CONNECTION");
         return connection;
-    },
-
-    insertUser: function() {
-        this.tryConnect().getConnection(function(err, con) {
-            var sql = "INSERT INTO customers (name, address) VALUES ('Tam asf', 'Booty 45')";
-            con.query(sql, function (err, result) {
-              if (err) throw err;
-              console.log("1 record inserted");
-            });
-        });
-    },
-
-    getUser: function(callback) {
-        this.tryConnect().getConnection(function(err, con) {
-            var sql = "SELECT * FROM customers";
-            con.query(sql, function (err, result) {
-              if (err) throw err;
-              return callback(result);
-            });
-        });
     }
 }

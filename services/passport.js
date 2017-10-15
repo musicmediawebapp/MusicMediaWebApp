@@ -1,8 +1,6 @@
 var passport = require('passport');
 var GoogleStrategy = require('passport-google-oauth20').Strategy;
 var keys = require('../config/keys');
-var mongoose = require('mongoose');
-var User = mongoose.model('users');
 var db = require('../database/queries');
 
 passport.use(
@@ -12,19 +10,16 @@ passport.use(
         callbackURL: '/auth/google/callback',
         proxy: true
     }, async (accessToken, refreshToken, profile, done) => {
-        // Once the user has OAuth'ed with Google, we retrieve the access token and save them as a User model in our DB
-        var existingUser = await User.findOne({ googleId: profile.id });
+        // Once the user has OAuth'ed with Google, we retrieve the access token
 
-        db.getUser(function(result) {
-            console.log(result);
+        db.getUserByGoogleID(profile.id, function(result) {
+            // If we've found the user via googleID, then she's already OAuthed.
+            if (result[0]) {
+                return done(null, result[0]);                
+            }
+            // If the user isn't OAuthed yet, save the User model to our DB
+            
         });
-
-        
-        if (existingUser) {
-            return done(null, existingUser); // Tells passport we're done w/ this user model
-        }
-        var user = new User({ googleId: profile.id }).save();
-        done(null, user);                    
     })
 );
 
@@ -34,12 +29,12 @@ passport.use(
 // called "done(...)" to tell Passport we were done OAuthing them, we saved
 // the User model
 passport.serializeUser((user, done) => {
-    done(null, user.id); // This ID is from mLab
+    done(null, user.ID); // This ID is from our DB
 });
 
 // ID --> User
-passport.deserializeUser((id, done) => {
-    User.findById(id).then(user => {
-        done(null, user);
-    });
+passport.deserializeUser((ID, done) => {
+    db.getUserByID(ID, function(result) {        
+        done(null, result[0]);                    
+    });  
 });
