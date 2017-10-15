@@ -1,5 +1,6 @@
 var mysql = require('mysql');
 var keys = require('../config/keys');
+var queries = require('./queries');
 
 var connection;
 module.exports = {
@@ -18,9 +19,7 @@ module.exports = {
     /* Retrieves a User model by GoogleID */
     getUserByGoogleID: function(googleID, callback) {
         this.tryConnect().getConnection(function(err, con) {
-            var sql = `SELECT * 
-                       FROM user 
-                       WHERE GoogleID = ?`;
+            var sql = queries.getUserByGoogleID;
             con.query(sql, googleID, function (err, result) {
                 con.release();
                 if (err) throw err;
