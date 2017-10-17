@@ -20,8 +20,13 @@ class App extends Component {
                 <BrowserRouter>
                     <div>
                         <Header />
+                        {/* The langing page users see when they're not logged in */}
                         <Route exact path="/" component={Landing} />
+
+                        {/* Once the user is logged in, all of the app's features and functionality is here */}
                         <Route exact path="/dashboard" component={Dashboard} />
+
+                        {/* This route is the setup workflow */}
                     </div>
                 </BrowserRouter>
             </div>

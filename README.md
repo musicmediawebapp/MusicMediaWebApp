@@ -1,4 +1,5 @@
 # MUSIC MEDIA STRUCTURE
+Think Twitter but for music. Ye, that's what this is.
 
 ## Client
 Everything within the client directory is the front-end resources (including React, Redux). This serves as the UI for our web application.
