@@ -40,12 +40,6 @@ module.exports = {
     },
 
     tryConnect: function() {
-        // Singleton: if connection is already established, return it
-        if (connection) {
-            console.log("Getting connection...already made");
-            return connection;
-        }
-
         // Otherwise, recreate the connection since the old one cannot be reused (due to either errors or upon initial app start-up)
         connection = mysql.createPool({
             connectionLimit: 100,
