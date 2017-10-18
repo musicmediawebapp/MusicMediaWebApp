@@ -31,9 +31,25 @@ module.exports = {
     getUserByID: function(ID, callback) {
         this.tryConnect().getConnection(function(err, con) {
             var sql = queries.getUserByID;
-            con.query(sql, ID, function (err, result) {
+            con.query({sql, 
+                typeCast: function(field, next) {
+
+                // We only want to cast bit fields that have a single-bit in them. If the field
+                // has more than one bit, then we cannot assume it is supposed to be a Boolean.
+                if ((field.type === "BIT" ) && (field.length === 1)) {
+        
+                    var bytes = field.buffer(); // AKA parser.parseLengthCodedBuffer()
+        
+                    // A Buffer in Node represents a collection of 8-bit unsigned integers.
+                    // Therefore, our single "bit field" comes back as the bits '0000 0001',
+                    // which is equivalent to the number 1.
+                    return (bytes[0] === 1);
+                }
+                return next();
+            }}, ID, function (err, result) {
                 if (err) throw err;
                 // Call the callback function in the caller of this method so we can do something with this "result"
+                console.log(result);
                 return callback(result); // [] if not found
             });
         });
@@ -42,7 +58,10 @@ module.exports = {
     tryConnect: function() {
         // If we've already made a Pool, return it so our consumer can get a connection out of it
         // using getConnection(...)
-        if (connection) { return connection; }
+        if (connection) {
+            console.log("Pool already made. Retrieve it to then make connections to it");
+            return connection; 
+        }
 
         // Otherwise, recreate the connection since the old one cannot be reused (due to either errors or upon initial app start-up)
         connection = mysql.createPool({
