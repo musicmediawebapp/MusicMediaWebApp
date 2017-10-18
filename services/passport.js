@@ -41,7 +41,7 @@ passport.serializeUser((ID, done) => {
 passport.deserializeUser((ID, done) => {
     dbService.getUserByID(ID, function(result) {
         // Convert "dbUser" (RowDataPacket in JSON form) to User
-        var user = new User(result[0]);
+        var user = new User(result);
         done(null, user);                    
     });
 });

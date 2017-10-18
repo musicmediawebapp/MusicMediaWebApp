@@ -49,7 +49,7 @@ module.exports = {
             }}, ID, function (err, result) {
                 if (err) throw err;
                 // Call the callback function in the caller of this method so we can do something with this "result"
-                return callback(result); // [] if not found
+                return callback(result[0]); // [] if not found
             });
         });
     },
