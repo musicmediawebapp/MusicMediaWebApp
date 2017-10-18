@@ -10,7 +10,6 @@ module.exports = {
             var sql = queries.insertUser;
             con.query(sql, [user.id, user.gender, user.name.givenName, user.name.familyName, user.emails[0].value], function (err, result) {
                 if (err) throw err;
-                con.release();                
                 callback(result.insertId);
             });
         });
@@ -22,7 +21,6 @@ module.exports = {
             var sql = queries.getUserByGoogleID;
             con.query(sql, googleID, function (err, result) {
                 if (err) throw err;
-                con.release();                
                 // Call the callback function in the caller of this method so we can do something with this "result"
                 return callback(result); // [] if not found
             });
@@ -35,7 +33,6 @@ module.exports = {
             var sql = queries.getUserByID;
             con.query(sql, ID, function (err, result) {
                 if (err) throw err;
-                con.release();
                 // Call the callback function in the caller of this method so we can do something with this "result"
                 return callback(result); // [] if not found
             });
@@ -43,6 +40,8 @@ module.exports = {
     },
 
     tryConnect: function() {
+        // If we've already made a Pool, return it so our consumer can get a connection out of it
+        // using getConnection(...)
         if (connection) { return connection; }
 
         // Otherwise, recreate the connection since the old one cannot be reused (due to either errors or upon initial app start-up)
