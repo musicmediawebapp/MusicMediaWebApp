@@ -1,8 +1,8 @@
 var passport = require('passport');
 var GoogleStrategy = require('passport-google-oauth20').Strategy;
 var keys = require('../config/keys');
-var mongoose = require('mongoose');
-var User = mongoose.model('users');
+var dbService = require('../database/dbService');
+var User = require('../models/user');
 
 passport.use(
     new GoogleStrategy({
@@ -11,14 +11,19 @@ passport.use(
         callbackURL: '/auth/google/callback',
         proxy: true
     }, async (accessToken, refreshToken, profile, done) => {
-        // Once the user has OAuth'ed with Google, we retrieve the access token and save them as a User model in our DB
-        var existingUser = await User.findOne({ googleId: profile.id });
 
-        if (existingUser) {
-            return done(null, existingUser); // Tells passport we're done w/ this user model
-        }
-        var user = new User({ googleId: profile.id }).save();
-        done(null, user);                    
+        dbService.getUserByGoogleID(profile.id, function(result) {
+            // If we've found the user via googleID, then she's already OAuthed.
+            if (result && result.length != 0 && result[0]) {
+                return done(null, result[0].ID);                
+            }
+            // If the user isn't OAuthed yet, insert the User model to our DB
+            else {
+                dbService.insertUser(profile, function(id) {
+                    done(null, id);
+                });
+            } 
+        });
     })
 );
 
@@ -27,13 +32,16 @@ passport.use(
 // Passport has a hold of "user" because in the above method, when we
 // called "done(...)" to tell Passport we were done OAuthing them, we saved
 // the User model
-passport.serializeUser((user, done) => {
-    done(null, user.id); // This ID is from mLab
+passport.serializeUser((ID, done) => {
+    done(null, ID); // This ID is from our DB
 });
 
 // ID --> User
-passport.deserializeUser((id, done) => {
-    User.findById(id).then(user => {
-        done(null, user);
+// All incoming requests to the server will have access to the req.user because of this deserialization
+passport.deserializeUser((ID, done) => {
+    dbService.getUserByID(ID, function(result) {
+        // Convert "dbUser" (RowDataPacket in JSON form) to User
+        var user = new User(result[0]);
+        done(null, user);                    
     });
 });
