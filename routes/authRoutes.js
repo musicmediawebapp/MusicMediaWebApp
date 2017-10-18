@@ -11,8 +11,7 @@ module.exports = app => {
     app.get('/auth/google/callback', passport.authenticate('google'), 
         (req, res) => {
             dbService.getUserByID(req.user, function(result) {
-                console.log("User:");
-                console.log(result);
+                //TODO: redirect to /setup if not set up yet
             });
             res.redirect('/dashboard');
         }
