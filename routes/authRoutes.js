@@ -10,11 +10,14 @@ module.exports = app => {
     // On callback, we verify with google that the code is right. Then, the access token will be given.
     app.get('/auth/google/callback', passport.authenticate('google'), 
         (req, res) => {
-            dbService.getUserByID(req.user, function(result) {
-                //TODO: redirect if profile set up is false
-                console.log(result.IsProfileSetUp);
+            // If a user's profile is not set up, redirect to /setup
+            // Otherwise, /dashboard
+            dbService.getUserByID(req.user, function(user) {
+                if (user.isProfileSetUp) {
+                    return res.redirect('/dashboard');                    
+                }
+                return res.redirect('/setup');
             });
-            res.redirect('/dashboard');
         }
     );
 
