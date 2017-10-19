@@ -5,7 +5,7 @@ class FormThirdPage extends Component {
         var { previousPage, handleSubmit } = this.props;
         return (
             <form onSubmit={handleSubmit}>
-                Third page!
+                I'm ready to start!
                 <button type="button" onClick={previousPage}>
                     Previous
                 </button>
