@@ -6,6 +6,7 @@ import * as actions from '../actions';
 // Component imports
 import Header from './Header'; // Will always show this header
 import Landing from './Landing'; // Below header in the front page
+import Workflow from './setup/Workflow';
 
 var Dashboard = () => <h2>Dashboard</h2> // Once logged in
 
@@ -27,6 +28,7 @@ class App extends Component {
                         <Route exact path="/dashboard" component={Dashboard} />
 
                         {/* This route is the setup workflow */}
+                        <Route exact path="/workflow" component={Workflow} />
                     </div>
                 </BrowserRouter>
             </div>
