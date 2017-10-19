@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
-import FirstPage from './FirstPage';
+import FormFirstPage from './FormFirstPage';
 
 class Workflow extends Component {
     render() {
         return(
             <div>
-                <FirstPage />
+                <FormFirstPage />
             </div>
         );
     }
 }
 
 export default Workflow;
+
+
