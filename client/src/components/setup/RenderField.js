@@ -1,13 +1,15 @@
 import React from 'react';
 
-// This is rendered by <Field /> so it comes with passed in props
+// This is rendered by <Field /> so redux-form will pass in default props
 // Give the props.input object to our <input /> element. That way it can behave as redux form expects it to.
-export default ({ input, label, meta }) => {
+var RenderField = ({ input, label, type, meta: { error, touched } }) => {
     return (
         <div>
             <label>{label}</label>
-            <input {...input} />
-            {meta.error}
+            <input {...input} placeholder={label} type={type} />
+            {touched && error}
         </div>
     );
 };
+
+export default RenderField;

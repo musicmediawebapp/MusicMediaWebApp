@@ -6,7 +6,9 @@ class FormFirstPage extends Component {
     renderFields() {
         return (
             <div>
-                <Field type="text" label="title" name="firstPageTitle" component={RenderField} />
+                <Field type="text" label="First name" name="firstName" component={RenderField} />
+                <Field type="text" label="Last name" name="lastName" component={RenderField} />
+                <Field type="text" label="Email" name="email" component={RenderField} />
             </div>
         );
     }
@@ -19,7 +21,7 @@ class FormFirstPage extends Component {
                     {this.renderFields()}
                     <button className="teal btn-flat right white-text" type="submit">
                         Next
-                        <i className="material-icons right">add_alert</i>
+                        <i className="material-icons right">done</i>
                     </button>
                 </form>
             </div>
