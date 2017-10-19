@@ -12,9 +12,10 @@ class FormFirstPage extends Component {
     }
 
     render() {
+        var { handleSubmit } = this.props;
         return(
             <div>
-                <form onSubmit={this.props.handleSubmit(values => console.log(values))}>
+                <form onSubmit={handleSubmit}>
                     {this.renderFields()}
                     <button className="teal btn-flat right white-text" type="submit">
                         Next

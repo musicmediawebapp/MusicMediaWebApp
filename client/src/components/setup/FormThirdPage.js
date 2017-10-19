@@ -2,10 +2,17 @@ import React, { Component } from 'react';
 
 class FormThirdPage extends Component {
     render() {
+        var { previousPage, handleSubmit } = this.props;
         return (
-            <div>
+            <form onSubmit={handleSubmit}>
                 Third page!
-            </div>
+                <button type="button" onClick={previousPage}>
+                    Previous
+                </button>
+                <button type="submit">
+                    Next
+                </button>
+            </form>
         );
     }
 }

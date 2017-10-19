@@ -7,7 +7,7 @@ class Workflow extends Component {
     constructor(props) {
         super(props)
 
-        this.nextPage = this.nextPage.bind(this); // Bind this method to a variable so it's bound to Javascript context
+        this.nextPage = this.nextPage.bind(this); // Purpose is to make a function called with "this" keyword
         this.previousPage = this.previousPage.bind(this);
         
         this.state = {
@@ -27,9 +27,9 @@ class Workflow extends Component {
         var { page } = this.state;
         return(
             <div>
-                {page === 1 && <FormFirstPage />}
-                {page === 2 && <FormSecondPage />}
-                {page === 3 && <FormThirdPage />}
+                {page === 1 && <FormFirstPage onSubmit={this.nextPage} />}
+                {page === 2 && <FormSecondPage previousPage={this.previousPage} onSubmit={this.nextPage} />}
+                {page === 3 && <FormThirdPage previousPage={this.previousPage} />}
             </div>
         );
     }
