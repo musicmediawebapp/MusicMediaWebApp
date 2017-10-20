@@ -5,5 +5,5 @@
 */
 [type="radio"]:not(:checked), [type="radio"]:checked {
     opacity: initial;
-    position: relative !important;
+    position: initial;
 }

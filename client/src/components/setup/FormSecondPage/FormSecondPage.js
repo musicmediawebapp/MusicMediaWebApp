@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form';
 import RenderField from '../RenderField';
-import css from './FormSecondPage.css';
+import './FormSecondPage.css';
 
 class FormSecondPage extends Component {
     renderFields() {
