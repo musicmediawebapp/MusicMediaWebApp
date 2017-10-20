@@ -1,14 +1,24 @@
 import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form';
-import RenderField from './RenderField';
+import RenderField from '../RenderField';
+import css from './FormSecondPage.css';
 
 class FormSecondPage extends Component {
     renderFields() {
         return (
             <div>
                 <Field type="text" label="Phone number" name="phoneNumber" component={RenderField} />
-                <Field type="text" label="Gender" name="gender" component={RenderField} />
-                <Field type="text" label="Location" name="location" component={RenderField} />
+                <label>
+                <Field name="sex" component="input" type="radio" value="male" />
+                {' '}
+                Male
+              </label>
+              <label>
+                <Field name="sex" component="input" type="radio" value="female" />
+                {' '}
+                Female
+              </label>
+              <Field type="text" label="Location" name="location" component={RenderField} />
             </div>
         );
     }

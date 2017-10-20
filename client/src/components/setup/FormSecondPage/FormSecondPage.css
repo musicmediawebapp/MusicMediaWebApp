@@ -1,0 +1,9 @@
+/*  Synax: [attribute="class name"]
+
+    By default, either by redux-form or materialize,
+    the radio buttons are invisibile. Override this behavior.
+*/
+[type="radio"]:not(:checked), [type="radio"]:checked {
+    opacity: initial;
+    position: relative !important;
+}

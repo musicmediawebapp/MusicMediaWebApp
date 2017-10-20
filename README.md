@@ -40,6 +40,11 @@ For context, a <Provider /> component (given by the react-redux library) takes i
 
 # DEBUGGING
 
+## Context
+Before we start debugging, we have to understand how our code gets to the server (either remote server or a port on localhost) in the first place.
+
+For our client-side code (React), we run "npm run start --prefix ./client". With this, Node.js will look for a scripts object in our package.json of our /client directory. If found, it'll run the scripts. This will minify and bundle all of our HTML, Javascript and CSS files and have the browser download them. You can see the HTML and CSS in the inspector tools, where you can change them on the fly. The javascript is under the "Sources" tab, specifically under "static/js/..."
+
 ## How to debug the front-end:
 1) Install React Devtools (Chrome extension)
 2) In the browser, turn to the React tab

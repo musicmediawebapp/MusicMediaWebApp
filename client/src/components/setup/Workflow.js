@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import FormFirstPage from './FormFirstPage';
-import FormSecondPage from './FormSecondPage';
+import FormSecondPage from './FormSecondPage/FormSecondPage';
 import FormThirdPage from './FormThirdPage';
 
 class Workflow extends Component {
