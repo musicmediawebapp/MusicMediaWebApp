@@ -1,20 +1,30 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import * as actions from '../../actions';
 
 class FormThirdPage extends Component {
     render() {
-        var { previousPage, handleSubmit } = this.props;
+        var { previousPage } = this.props;
         return (
-            <form onSubmit={handleSubmit}>
+            <div>
                 I'm ready to start!
                 <button type="button" onClick={previousPage}>
                     Previous
                 </button>
-                <button type="submit">
-                    Next
-                </button>
-            </form>
+                <button onClick={() => console.log(this.props.formValues)}>
+                Next
+            </button>
+            </div>
         );
     }
 }
 
-export default FormThirdPage;
+// We use the "connect" library to reach this redux-form reducer
+function mapStateToProps({ form: { workflowForm } }) {
+    return {
+        formValues: workflowForm.values
+    };
+}
+
+/* mapStateToProps (access to reducers), actions (returned actions) */
+export default connect(mapStateToProps, actions)(FormThirdPage);

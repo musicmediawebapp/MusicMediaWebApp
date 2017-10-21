@@ -9,11 +9,11 @@ class FormSecondPage extends Component {
     renderFields() {
         return _.map(FormFields, ({ key, type, label, name, component: { RenderField }, value }) => {
             if (type === "text") {
-                return <Field  key={guid} type={type} label={label} name={name} component={RenderField} />
+                return <Field  key={key} type={type} label={label} name={name} component={RenderField} />
             }
             else if (type === "radio") {
                 // For Fields with type "radio", we must wrap it around a label element for it to work
-                return <label><Field key={guid} type={type} label={label} name={name} component={RenderField} value={value} /></label>
+                return <label><Field key={key} type={type} label={label} name={name} component={RenderField} value={value} /></label>
             }
         });
     }

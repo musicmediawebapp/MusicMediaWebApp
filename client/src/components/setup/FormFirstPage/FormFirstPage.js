@@ -36,7 +36,7 @@ class FormFirstPage extends Component {
 }
 
 export default reduxForm({
-    form: 'workflowForm',
+    form: 'workflowForm', // redux-form stores a reducer for "form", and all of our different forms are specified by this string
     destroyOnUnmount: false,
     validate
 })(FormFirstPage);
