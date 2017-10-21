@@ -33,5 +33,5 @@ class FormFirstPage extends Component {
 export default reduxForm({
     form: 'workflowForm',
     destroyOnUnmount: false,
-    validate: validate
+    validate
 })(FormFirstPage);

@@ -40,5 +40,5 @@ class FormSecondPage extends Component {
 export default reduxForm({
     form: 'workflowForm',
     destroyOnUnmount: false,
-    validate: validate
+    validate
 })(FormSecondPage);

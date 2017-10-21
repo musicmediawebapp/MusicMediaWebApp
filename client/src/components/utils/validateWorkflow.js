@@ -18,14 +18,14 @@ var validate =  values => {
         errors.email = "Required";
     }
 
-    if (!values.sex) {
-        errors.sex = "Required";
-    }
-
     /* FormSecondPage */
     if (!values.phoneNumber) {
         // We'll stick an "error" object within the Field (with the specified title)'s "meta" object
         errors.phoneNumber = "Required";
+    }
+
+    if (!values.sex) {
+        errors.sex = "Required";
     }
 
     if (!values.location) {
