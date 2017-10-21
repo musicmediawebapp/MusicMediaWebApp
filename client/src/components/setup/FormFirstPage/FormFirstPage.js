@@ -6,10 +6,10 @@ import _ from 'lodash';
 
 class FormFirstPage extends Component {
     renderFields() {
-        return _.map(formFields, ({ type, label, name, component }) => {
+        return _.map(formFields, ({ key, type, label, name, component }) => {
             return (
                 <Field 
-                    key={name}
+                    key={key}
                     type={type}
                     label={label}
                     name={name}

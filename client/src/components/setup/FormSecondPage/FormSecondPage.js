@@ -1,23 +1,25 @@
 import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form';
-import RenderField from '../RenderField/RenderField';
 import './FormSecondPage.css';
 import validate from '../../utils/ValidateWorkflow';
+import _ from 'lodash';
+import FormFields from './FormFields';
+
+Guid.raw();
+var guid = Guid.create();
+
 
 class FormSecondPage extends Component {
     renderFields() {
-        return (
-            <div>
-                <Field type="text" label="Phone number" name="phoneNumber" component={RenderField} />
-                <label>
-                    <Field type="radio" label="Male" name="sex" component={RenderField} value="male" />
-                </label>
-                <label>
-                    <Field type="radio" label="Female" name="sex" component={RenderField} value="female" />
-                </label>
-                <Field type="text" label="Location" name="location" component={RenderField} />
-            </div>
-        );
+        return _.map(FormFields, ({ key, type, label, name, component: { RenderField }, value }) => {
+            if (type === "text") {
+                return <Field  key={guid} type={type} label={label} name={name} component={RenderField} />
+            }
+            else if (type === "radio") {
+                // For Fields with type "radio", we must wrap it around a label element for it to work
+                return <label><Field key={guid} type={type} label={label} name={name} component={RenderField} value={value} /></label>
+            }
+        });
     }
 
     render() {
