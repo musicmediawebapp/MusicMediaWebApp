@@ -4,14 +4,14 @@ import * as actions from '../../actions';
 
 class FormThirdPage extends Component {
     render() {
-        var { previousPage } = this.props;
+        var { previousPage, formValues } = this.props;
         return (
             <div>
                 I'm ready to start!
                 <button type="button" onClick={previousPage}>
                     Previous
                 </button>
-                <button onClick={() => console.log(this.props.formValues)}>
+                <button onClick={() => console.log(formValues)}>
                 Next
             </button>
             </div>
