@@ -29,7 +29,7 @@ class Workflow extends Component {
         var { auth } = this.props;
         return(
             <div>
-                {page === 1 && <FormFirstPage onSubmit={this.nextPage} user={auth} />}
+                {page === 1 && <FormFirstPage onSubmit={this.nextPage} />}
                 {page === 2 && <FormSecondPage previousPage={this.previousPage} onSubmit={this.nextPage} />}
                 {page === 3 && <FormThirdPage previousPage={this.previousPage} />}
             </div>
