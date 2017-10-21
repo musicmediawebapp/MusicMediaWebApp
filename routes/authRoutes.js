@@ -1,4 +1,5 @@
 var passport = require('passport');
+var dbService = require('../database/dbService');
 
 module.exports = app => {
     // Kicks off the Google OAuth process and requests profile and email from the user
@@ -9,7 +10,14 @@ module.exports = app => {
     // On callback, we verify with google that the code is right. Then, the access token will be given.
     app.get('/auth/google/callback', passport.authenticate('google'), 
         (req, res) => {
-            res.redirect('/dashboard');
+            // If a user's profile is not set up, redirect to /setup
+            // Otherwise, /dashboard
+            dbService.getUserByID(req.user, function(user) {
+                if (user.isProfileSetUp) {
+                    return res.redirect('/dashboard');                    
+                }
+                return res.redirect('/setup');
+            });
         }
     );
 
