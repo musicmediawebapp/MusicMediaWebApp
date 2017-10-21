@@ -6,7 +6,7 @@ var RenderField = ({ input, label, type, meta: { error, touched } }) => {
     return (
         <div>
             <label>{label}</label>
-            <input {...input} placeholder={label} type={type} />
+            <input {...input} placeholder={label} type={type} value={input.value} />
             {touched && error}
         </div>
     );

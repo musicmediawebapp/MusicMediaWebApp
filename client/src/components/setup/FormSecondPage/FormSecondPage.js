@@ -9,16 +9,12 @@ class FormSecondPage extends Component {
             <div>
                 <Field type="text" label="Phone number" name="phoneNumber" component={RenderField} />
                 <label>
-                <Field name="sex" component="input" type="radio" value="male" />
-                {' '}
-                Male
-              </label>
-              <label>
-                <Field name="sex" component="input" type="radio" value="female" />
-                {' '}
-                Female
-              </label>
-              <Field type="text" label="Location" name="location" component={RenderField} />
+                    <Field type="radio" label="Male" name="sex" component={RenderField} value="male" />
+                </label>
+                <label>
+                    <Field type="radio" label="Female" name="sex" component={RenderField} value="female" />
+                </label>
+                <Field type="text" label="Location" name="location" component={RenderField} />
             </div>
         );
     }
