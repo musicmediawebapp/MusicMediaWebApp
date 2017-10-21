@@ -1,4 +1,5 @@
 /* Margin 0 */
-:global(.mb-0) {
-    margin-bottom: 0px;
-}
+:global(.mt-0) { margin-top: 0px; }
+:global(.mr-0) { margin-right: 0px; }
+:global(.mb-0) { margin-bottom: 0px; }
+:global(.ml-0) { margin-left: 0px; }
