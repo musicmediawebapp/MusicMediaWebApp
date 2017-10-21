@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import FormFirstPage from './FormFirstPage';
+import FormFirstPage from './FormFirstPage/FormFirstPage';
 import FormSecondPage from './FormSecondPage/FormSecondPage';
 import FormThirdPage from './FormThirdPage';
 

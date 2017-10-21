@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form';
 import RenderField from '../RenderField/RenderField';
 import './FormSecondPage.css';
-import validate from '../../utils/validateWorkflow';
+import validate from '../../utils/ValidateWorkflow';
 
 class FormSecondPage extends Component {
     renderFields() {

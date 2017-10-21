@@ -1,17 +1,22 @@
 import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form';
-import RenderField from './RenderField/RenderField';
-import validate from '../utils/validateWorkflow';
+import validate from '../../utils/ValidateWorkflow';
+import formFields from './FormFields';
+import _ from 'lodash';
 
 class FormFirstPage extends Component {
     renderFields() {
-        return (
-            <div>
-                <Field type="text" label="First name" name="firstName" component={RenderField} />
-                <Field type="text" label="Last name" name="lastName" component={RenderField} />
-                <Field type="text" label="Email" name="email" component={RenderField} />
-            </div>
-        );
+        return _.map(formFields, ({ type, label, name, component }) => {
+            return (
+                <Field 
+                    key={name}
+                    type={type}
+                    label={label}
+                    name={name}
+                    component={component.RenderField}
+                />
+            );
+        });
     }
 
     render() {
