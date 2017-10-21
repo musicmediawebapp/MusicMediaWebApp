@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form';
-import RenderField from './RenderField';
+import RenderField from './RenderField/RenderField';
 import validate from '../utils/validateWorkflow';
 
 class FormFirstPage extends Component {
