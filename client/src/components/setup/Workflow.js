@@ -26,10 +26,10 @@ class Workflow extends Component {
 
     render() {
         var { page } = this.state;
-        console.log(this.props.auth);        
+        var { auth } = this.props;
         return(
             <div>
-                {page === 1 && <FormFirstPage onSubmit={this.nextPage} />}
+                {page === 1 && <FormFirstPage onSubmit={this.nextPage} user={auth} />}
                 {page === 2 && <FormSecondPage previousPage={this.previousPage} onSubmit={this.nextPage} />}
                 {page === 3 && <FormThirdPage previousPage={this.previousPage} />}
             </div>
