@@ -5,10 +5,6 @@ import validate from '../../utils/ValidateWorkflow';
 import _ from 'lodash';
 import FormFields from './FormFields';
 
-Guid.raw();
-var guid = Guid.create();
-
-
 class FormSecondPage extends Component {
     renderFields() {
         return _.map(FormFields, ({ key, type, label, name, component: { RenderField }, value }) => {
