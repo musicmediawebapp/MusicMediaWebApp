@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form';
 import RenderField from '../RenderField';
 import './FormSecondPage.css';
+import validate from '../../utils/validateWorkflow';
 
 class FormSecondPage extends Component {
     renderFields() {
@@ -35,8 +36,9 @@ class FormSecondPage extends Component {
         );
     }
 }
-
+    
 export default reduxForm({
     form: 'workflowForm',
-    destroyOnUnmount: false    
+    destroyOnUnmount: false,
+    validate: validate
 })(FormSecondPage);
