@@ -8,12 +8,13 @@ class FormThirdPage extends Component {
         return (
             <div>
                 I'm ready to start!
-                <button type="button" onClick={previousPage}>
+                <button className="teal btn-flat left white-text" type="button" onClick={previousPage}>
                     Previous
                 </button>
-                <button onClick={() => console.log(formValues)}>
-                Next
-            </button>
+                <button className="teal btn-flat right white-text" onClick={() => console.log(formValues)}>
+                    Next
+                    <i className="material-icons right">done</i>
+                </button>
             </div>
         );
     }
