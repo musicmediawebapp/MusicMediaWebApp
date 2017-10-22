@@ -3,10 +3,13 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 import './App.css';
+import { Switch } from 'react-router';
 
 // Component imports
 import Header from './Header'; // Will always show this header
 import Landing from './Landing'; // Below header in the front page
+import Workflow from './setup/Workflow';
+import Error from './Error/Error';
 
 var Dashboard = () => <h2>Dashboard</h2> // Once logged in
 
@@ -21,13 +24,21 @@ class App extends Component {
                 <BrowserRouter>
                     <div>
                         <Header />
-                        {/* The langing page users see when they're not logged in */}
-                        <Route exact path="/" component={Landing} />
+                        <Switch>
+                            {/* The landing page users see when they're not logged in */}
+                            <Route exact path="/" component={Landing} />
 
-                        {/* Once the user is logged in, all of the app's features and functionality is here */}
-                        <Route exact path="/dashboard" component={Dashboard} />
+                            {/* Once the user is logged in, all of the app's features and functionality is here */}
+                            <Route exact path="/dashboard" component={Dashboard} />
 
-                        {/* This route is the setup workflow */}
+                            {/* This route is the setup workflow */}
+                            <Route exact path="/workflow" component={Workflow} />
+
+                            {/* This is for any explicit redirects to the Error page */}
+                            <Route exact path="/error" component={Error} />
+                            {/* Handle the edgecase in which the user types in a random URL or an unhandled URL */}
+                            <Route exact path="*" component={Error} />
+                        </Switch>
                     </div>
                 </BrowserRouter>
             </div>

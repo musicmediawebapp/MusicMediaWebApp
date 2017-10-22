@@ -6,6 +6,10 @@ Everything within the client directory is the front-end resources (including Rea
 
 Specifics, we use Redux (and Redux form) to make HTTP requests to our backend. These endpoints live within the /client/src/actions directory.
 
+Another technology we use is redux-form. We import its reducer (cleverly named, "reducer") into our reducers folder and add it as a key so that our components can have access to it. How to allow React components to talk to our redux store (which again, contains all of our reducers), we import a redux-form helper into our components. That's all of the hard work we have to do. Outside of that, redux-form will call action creators, updates the state in redux store. All we have to do is hook it with reduxForm() instead of connect()
+
+Low-level, we use <Field /> components to render HTML elements on our redux forms. It takes in a name, which when the <Field /> takes in some value, that value will be stored in the redux store (aka called an action creator, returned a dispatched action) under the key of said name. 
+
 ## Config
 The config folder stores all of our configurations, both for development and production.
 
@@ -50,3 +54,22 @@ You can use the V8 Inspector tool to debug the Express routes but that won't do 
 The best way to go about debugging the backend is to call the routes from the React side (and if React isn't working, we have tools to make sure data is sent over the right way). You can do this by binding axios to the window and making AJAX calls with dummy data or to interact with the UI itself.
 
 In the backend, you can console.log everything.
+
+## FAQ & MISC.
+
+## How does our code even get to the server for us to see and play with?
+Before we start debugging, we have to understand how our code gets to the server (either remote server or a port on localhost) in the first place.
+
+For our client-side code (React), we run "npm run start --prefix ./client". With this, Node.js will look for a scripts object in our package.json of our /client directory. If found, it'll run the scripts. This will minify and bundle all of our HTML, Javascript and CSS files and have the browser parse them. You can see the HTML and CSS in the inspector tools, where you can change them on the fly. The javascript is under the "Sources" tab, specifically under "static/js/..."
+
+How it all works together, when we run our backend server, we'll whip up a port that is an endpoint of communication; it'll talk to our server, whether that's hosted on the cloud or our local machine. Any requests we make to our Express routes via the browser (on the designated port) will give us back the response.
+
+As for the front-end, our script will bundle all of our JS, CSS and HTML and hand that to the browser for it to download and display.
+
+## How do modern web browsers (i.e Chrome) work behind the hood?
+No idea.
+
+## What's bundling and minification?
+1) Bundling combines (or bundles) multiple files into a single file (i.e CSS bundles, JS bundles, etc). Fewer files means fewer HTTP requests to retrieve them, which means better page load performance.
+
+2) Minification removes white space and comments and shortens variables names. Saves space.
