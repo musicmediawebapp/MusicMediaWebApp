@@ -3,17 +3,17 @@ var keys = require('./config/keys');
 var cookieSession = require('cookie-session');
 var passport = require('passport');
 var dbService = require('./database/dbService');
+var bodyParser = require('body-parser');
 
 /* Service imports */
 require('./services/passport');
-
-/* Route imports */
-var authRoutes = require('./routes/authRoutes');
 
 /* SET UP */
 /* We are using a single instance of Express to handle incoming requests */
 var express = require('express');
 var app = express();
+
+app.use(bodyParser.json());
 app.use(
     cookieSession({
         maxAge: 30 * 24 * 60 * 60 * 1000,
@@ -23,7 +23,9 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-authRoutes(app);
+/* Route imports */
+require('./routes/authRoutes')(app);
+require('./routes/userRoutes')(app);
 
 /* SQL connection */
 dbService.tryConnect();
@@ -42,5 +44,5 @@ if (process.env.NODE_ENV === 'production') {
     });
 }
 
-/* Instruct Express to listen to this port */
+/* Instruct Express to listen to this port. */
 app.listen(process.env.PORT || 5000);

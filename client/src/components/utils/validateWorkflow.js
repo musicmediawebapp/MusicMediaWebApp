@@ -24,8 +24,8 @@ var validate =  values => {
         errors.phoneNumber = "Required";
     }
 
-    if (!values.sex) {
-        errors.sex = "Required";
+    if (!values.gender) {
+        errors.gender = "Required";
     }
 
     if (!values.location) {
