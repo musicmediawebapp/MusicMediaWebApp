@@ -33,6 +33,9 @@ class App extends Component {
                             {/* This route is the setup workflow */}
                             <Route exact path="/workflow" component={Workflow} />
 
+                            {/* This is for any explicit redirects to the Error page */}
+                            <Route exact path="/error" component={Error} />
+                            {/* Handle the edgecase in which the user types in a random URL or an unhandled URL */}
                             <Route exact path="*" component={Error} />
                         </Switch>
                     </div>
