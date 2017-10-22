@@ -8,7 +8,8 @@ module.exports = {
     insertUser: function(user, callback) {
         this.tryConnect().getConnection(function(err, con) {
             var sql = queries.insertUser;
-            con.query(sql, [user.id, user.gender, user.name.givenName, user.name.familyName, user.emails[0].value], function (err, result) {
+            con.query(sql, [user.id, user.gender, user.name.givenName, user.name.familyName, user.emails[0].value, user._json.placesLived[0].value]
+            , function (err, result) {
                 con.release();                
                 if (err) throw err;
                 callback(result.insertId);

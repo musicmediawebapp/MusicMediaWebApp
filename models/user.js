@@ -11,5 +11,6 @@ module.exports = class User {
         this.email = dbUser.Email; // We arbitrarily retrieve the first email. Upon set up, user can change this.
                                             // It's only when we OAuth a new user that we set this.
         this.isProfileSetUp = dbUser.IsProfileSetUp;
+        this.location = dbUser.Location;
     }
 }
