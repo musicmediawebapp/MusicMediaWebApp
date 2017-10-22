@@ -19,8 +19,10 @@ export var submitWorkflow = (formData, history) => {
         var res = await axios.post('/api/user', formData);
         // Upon a successful workflow set up, redirect to the dashboard
         if (res.status === 200) {
-            return history.push('/dashboard');            
+            history.push('/dashboard');            
         }
-        console.log("looks like we had an error inserting/updating the user");
+        else {
+            history.push('/error');
+        }
     }
 }
