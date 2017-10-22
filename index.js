@@ -26,7 +26,7 @@ app.use(passport.session());
 authRoutes(app);
 
 /* SQL connection */
-dbService.tryConnect();
+//dbService.tryConnect();
 
 if (process.env.NODE_ENV === 'production') {
     // Express will serve up the main.js or main.css files when they're QUERIED from the front-end
