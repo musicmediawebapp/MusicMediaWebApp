@@ -8,7 +8,7 @@ module.exports = {
     insertUser: function(user, callback) {
         this.tryConnect().getConnection(function(err, con) {
             var sql = queries.insertUser;
-            con.query(sql, [user.id, user.gender, user.name.givenName, user.name.familyName, user.emails[0].value, user._json.placesLived[0].value]
+            con.query(sql, [user.id, user.gender, user.name.givenName, user.name.familyName, user.emails[0].value, user._json.placesLived[0].value, user.phoneNumber]
             , function (err, result) {
                 con.release();                
                 if (err) throw err;
@@ -20,7 +20,11 @@ module.exports = {
     replaceUserOnDuplicate: function(user, callback) {
         this.tryConnect().getConnection(function(err, con) {
             var sql = queries.ReplaceUserOnDuplicate;
-            con.query(sql, [6969, 69, "Male", "Minh", "Lu", "minhlu3@gmail.com", 1, "Seattle", 69, "Male", "Minh", "Lu", "minhlu3@gmail.com", 1, "Seattle"], function (err, result) {
+            // Insert parameters
+            con.query(sql, [user.id, user.googleID, user.gender, user.firstName, user.lastName, user.email, user.isProfileSetUp, user.location, user.phoneNumber,
+                 // On Duplicate Key Update parameters
+                 user.googleID, user.gender, user.firstName, user.lastName, user.email, user.isProfileSetUp, user.location, user.phoneNumber], 
+                 function (err, result) {
                 con.release();
                 if (err) throw err;
                 return callback(result.insertId);

@@ -15,6 +15,8 @@ export var fetchUser = () => {
    Param2 (history): helps navigate to /dashboard */
 export var submitWorkflow = (formData, history) => {
     return async function(dispatch) {
+        // User finished the workflow set up, so set the flag to true
+        formData.isProfileSetUp = true;
         // Insert or update the user model to the backend
         var res = await axios.post('/api/user', formData);
         // Upon a successful workflow set up, redirect to the dashboard

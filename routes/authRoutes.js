@@ -13,7 +13,7 @@ module.exports = app => {
             // If a user's profile is not set up, redirect to /workflow
             // Otherwise, /dashboard
             dbService.getUserByID(req.user, function(user) {
-                if (user.isProfileSetUp) {
+                if (user.IsProfileSetUp) {
                     return res.redirect('/dashboard');                    
                 }
                 return res.redirect('/workflow');

@@ -3,6 +3,8 @@ import { reduxForm, Field } from 'redux-form';
 import validate from '../../utils/ValidateWorkflow';
 import formFields from './FormFields';
 import _ from 'lodash';
+import { fetchUser } from '../../../actions/index';
+import { connect } from 'react-redux';
 
 class FormFirstPage extends Component {
     renderFields() {
@@ -35,8 +37,17 @@ class FormFirstPage extends Component {
     }
 }
 
-export default reduxForm({
+FormFirstPage = reduxForm({
     form: 'workflowForm', // redux-form stores a reducer for "form", and all of our different forms are specified by this string
     destroyOnUnmount: false,
     validate
 })(FormFirstPage);
+
+FormFirstPage = connect(
+    state => ({
+        initialValues: state.auth // pull initial values from auth reducer
+    }),
+    {load: fetchUser} // bind loading action creator
+)(FormFirstPage);
+
+export default FormFirstPage;

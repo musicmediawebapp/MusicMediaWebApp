@@ -12,5 +12,6 @@ module.exports = class User {
                                             // It's only when we OAuth a new user that we set this.
         this.isProfileSetUp = dbUser.IsProfileSetUp;
         this.location = dbUser.Location;
+        this.phoneNumber = dbUser.PhoneNumber;
     }
 }
