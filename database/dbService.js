@@ -6,9 +6,14 @@ var connection;
 module.exports = {
     /* Inserts a given user model given by Google OAuth */
     insertUser: function(user, callback) {
+
+        var placesLived = user._json.placesLived; // Handle situation in which Google gives us back an undefined user location
+        if (!placesLived) { placesLived = null; }
+        else { placesLived = placesLived[0].value; }
+
         this.tryConnect().getConnection(function(err, con) {
             var sql = queries.insertUser;
-            con.query(sql, [user.id, user.gender, user.name.givenName, user.name.familyName, user.emails[0].value, user._json.placesLived[0].value, user.phoneNumber]
+            con.query(sql, [user.id, user.gender, user.name.givenName, user.name.familyName, user.emails[0].value, placesLived, user.phoneNumber]
             , function (err, result) {
                 con.release();                
                 if (err) throw err;
