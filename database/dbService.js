@@ -17,6 +17,17 @@ module.exports = {
         });
     },
 
+    replaceUserOnDuplicate: function(user, callback) {
+        this.tryConnect().getConnection(function(err, con) {
+            var sql = queries.ReplaceUserOnDuplicate;
+            con.query(sql, [6969, 69, "Male", "Minh", "Lu", "minhlu3@gmail.com", 1, "Seattle", 69, "Male", "Minh", "Lu", "minhlu3@gmail.com", 1, "Seattle"], function (err, result) {
+                con.release();
+                if (err) throw err;
+                return callback(result.insertId);
+            });
+        });
+    },
+
     /* Retrieves a User model by GoogleID */
     getUserByGoogleID: function(googleID, callback) {
         this.tryConnect().getConnection(function(err, con) {
