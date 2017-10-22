@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
+import './Landing.css';
 
 class Landing extends Component {
     render() {
         return(
             <div>
-                This is the page you see when you are at our landing page.
+                <div id="landing">
+                    <img src={require('../assets/images/landing-temp.jpg')} alt="" />
+                </div>
+                <div> 
+                    
+                </div> 
             </div>
         );
     }

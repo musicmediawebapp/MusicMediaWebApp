@@ -1,0 +1,10 @@
+
+#landing {
+    width: 100%;
+    height: 550px;
+    overflow: hidden;
+} 
+#landing img {
+    width: 100%;
+    height: 600px;
+}
