@@ -15,11 +15,15 @@ passport.use(
         dbService.getUserByGoogleID(profile.id, function(result) {
             // If we've found the user via googleID, then she's already OAuthed.
             if (result && result.length != 0 && result[0]) {
+                // Trace it when the user logs in
+                dbService.insertActivityLog(result[0].ID, result[0].FirstName, result[0].LastName, "Existing user finished OAuth and logged in");                
+
                 return done(null, result[0].ID);                
             }
             // If the user isn't OAuthed yet, insert the User model to our DB
             else {
                 dbService.insertUser(profile, function(id) {
+                    dbService.insertActivityLog(id, null, null, "New user OAuth'ed and logged in");                                    
                     done(null, id);
                 });
             } 
