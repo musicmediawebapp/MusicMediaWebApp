@@ -10,38 +10,34 @@ module.exports = {
             var sql = queries.insertUser;
             con.query(sql, [user.id, user.gender, user.name.givenName, user.name.familyName, user.emails[0].value, user._json.placesLived[0].value, user.phoneNumber]
             , function (err, result) {
-                con.release();                
                 if (err) throw err;
-                return callback(result.insertId);
+                callback(result.insertId);
+                con.release();                                
             });
         });
     },
 
-    insertActivityLog = (ID, firstName, lastName, action) => {
-        this.tryConnect().getConnection(function queryDatabase(err, con) {
+    insertActivityLog: function(ID, firstName, lastName, action) {
+        this.tryConnect().getConnection(function (err, con) {
             var sql = queries.insertActivityLog;
-
-            con.query(sql, [ID, firstName, lastName, action], function getResponse(err, result) {
-                con.release();
-
+            con.query(sql, [ID, firstName, lastName, action], function (err, result) {
                 if (err) throw err;
-
-                return;
+                con.release();
             });
         });
     },
 
     replaceUserOnDuplicate: function(user, callback) {
         this.tryConnect().getConnection(function(err, con) {
-            var sql = queries.ReplaceUserOnDuplicate;
+            var sql = queries.replaceUserOnDuplicate;
             // Insert parameters
             con.query(sql, [user.id, user.googleID, user.gender, user.firstName, user.lastName, user.email, user.isProfileSetUp, user.location, user.phoneNumber,
                  // On Duplicate Key Update parameters
                  user.googleID, user.gender, user.firstName, user.lastName, user.email, user.isProfileSetUp, user.location, user.phoneNumber], 
                  function (err, result) {
-                con.release();
                 if (err) throw err;
-                return callback(result.insertId);
+                callback(result.insertId);
+                con.release();                
             });
         });
     },
@@ -51,10 +47,10 @@ module.exports = {
         this.tryConnect().getConnection(function(err, con) {
             var sql = queries.getUserByGoogleID;
             con.query(sql, googleID, function (err, result) {
-                con.release();                
                 if (err) throw err;
                 // Call the callback function in the caller of this method so we can do something with this "result"
-                return callback(result); // [] if not found
+                callback(result); // [] if not found
+                con.release();                                
             });
         });
     },
