@@ -12,7 +12,21 @@ module.exports = {
             , function (err, result) {
                 con.release();                
                 if (err) throw err;
-                callback(result.insertId);
+                return callback(result.insertId);
+            });
+        });
+    },
+
+    insertActivityLog = (ID, firstName, lastName, action) => {
+        this.tryConnect().getConnection(function queryDatabase(err, con) {
+            var sql = queries.insertActivityLog;
+
+            con.query(sql, [ID, firstName, lastName, action], function getResponse(err, result) {
+                con.release();
+
+                if (err) throw err;
+
+                return;
             });
         });
     },
