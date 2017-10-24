@@ -1,4 +1,4 @@
-var dbService = require('../database/dbService');
+var dbService = require('../../database/dbService');
 
 module.exports = app => {
     app.post('/api/user', (req, res) => {
