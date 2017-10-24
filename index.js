@@ -25,7 +25,7 @@ app.use(passport.session());
 
 /* Route imports */
 require('./routes/authRoutes')(app);
-require('./routes/userRoutes/userRoutes')(app);
+require('./routes/userRoutes')(app);
 
 /* SQL connection */
 dbService.tryConnect();
