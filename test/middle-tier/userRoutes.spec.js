@@ -1,6 +1,7 @@
-import 'mocha';
-import { expect, assert } from 'chai';
-import * as sinon from 'sinon';
+var mocha = require('mocha');
+var expect = require('chai').expect;
+var assert = require('chai').assert;
+var sinon = require('sinon');
 
 describe('Array', function() {
     it('should start empty', function() {
