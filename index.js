@@ -29,6 +29,24 @@ require('./routes/userRoutes')(app);
 
 var equationSolver = require('./equationSolver');
 
+var exposeDb = function(req, resp, next) {
+    req.dbService= dbService;
+    next();
+};
+
+app.get('/test', exposeDb, function(req, res) {
+    req.dbService.getUserByID(req.body, function(err, result) {
+        if (result == 5) {
+            console.log(result);
+            res.json({result: result});
+        }
+        else {
+            console.log(result);
+            res.json({result: result});
+        }
+    });
+});
+
 app.use('/api/equation', function (req, res, next) {
     if (req.method === 'POST') {
         if (!req.body.equation) {

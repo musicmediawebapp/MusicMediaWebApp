@@ -8,15 +8,32 @@ var sinon = require('sinon');
 
 var server = require('../../index');
 
+var dbService = require('../../database/dbService');
+
 chai.use(chaiHttp);
 
-describe('Array', function() {
-    it('should start empty', function() {
-        var arr = [];
+describe('Test', function() {
+    beforeEach(function() {
+        var getUserByIDStubE = sinon.stub(dbService, 'getUserByID').callsFake(cb => {
+            cb(undefined, 5);
+        });
 
-        assert.equal(arr.length, 0, "Array length was not 0");
+        var req = new Request();
+        req.body = 34;
+      });
+
+    it('TESTSETSTETS', function(done) {        
+        chai.request(server)
+            .get('/test')
+            .send({ req })
+            .end(function (err, res) {
+                res.body.result.should.equal(5);
+                done();
+            });
     });
 });
+
+
 
 describe('consumer', function() {
     describe('POST', function () {
