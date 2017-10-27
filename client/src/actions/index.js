@@ -21,7 +21,7 @@ export var submitWorkflow = (formData, history) => {
         // Insert or update the user model to the backend
         try {
             var res = await axios.post('/api/user', formData);
-            if (res.status === 200) {
+            if (res.status === 200 && formData.formType === "workflow") {
                 return history.push({
                     pathname: '/dashboard',
                     state: { finishedWorkflow: true }
