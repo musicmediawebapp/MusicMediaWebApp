@@ -6,26 +6,30 @@ Everything within the client directory is the front-end resources (including Rea
 
 Specifics, we use Redux (and Redux form) to make HTTP requests to our backend. These endpoints live within the /client/src/actions directory.
 
-Another technology we use is redux-form. We import its reducer (cleverly named, "reducer") into our reducers folder and add it as a key so that our components can have access to it. How to allow React components to talk to our redux store (which again, contains all of our reducers), we import a redux-form helper into our components. That's all of the hard work we have to do. Outside of that, redux-form will call action creators, updates the state in redux store. All we have to do is hook it with reduxForm() instead of connect()
+Another technology we use is redux-form. We import its reducer into our reducers folder (under the combineReducers({})) and add it as a key so that our components can have access to it. How to allow React components to talk to our redux store (which again, contains all of our reducers), we import a redux-form helper into our components. That's all of the hard work we have to do. Outside of that, redux-form will call action creators (upon form changes), updates the state in redux store. All we have to do is hook it with reduxForm() instead of connect().
 
-Low-level, we use <Field /> components to render HTML elements on our redux forms. It takes in a name, which when the <Field /> takes in some value, that value will be stored in the redux store (aka called an action creator, returned a dispatched action) under the key of said name. 
+Low-level, we use <Field /> components to render HTML elements on our redux forms. It takes in a name attribute, which when the <Field /> takes in some value, that value will be stored in the redux store (aka called an action creator, returned a dispatched action) under the key of said name. 
 
 ## Config
-The config folder stores all of our configurations, both for development and production.
+The config folder stores all of our configurations, both for development and production. Obviously, the dev.js keys are not on Github. Ask me for them if you need them. As for the prod.js keys, they point to the environmental variables on the Heroku servers. When our application runs (either on Heroku or locally), the process.env variables to see if we're in production or development mode, and subsequently see which set of keys to use.
 
 ## Models
-The models for our middle-tier.
+The models for our middle-tier such as the User.js model. Any models returned from our database is converted into this model so the front-end and middle-tier can use it nicely.
 
 ## Routes
-The routes folder has all of the backend Express route handling. Whenever a user routes around our application with data requests,Express will retrieve said requests from the database.
+The routes folder has all of the backend Express route handling. Whenever a user routes around our application with data requests,Express will retrieve said requests from the database. This should contain most of the logic. It acts as a "controller" and will transform data as need be between the front-end and backend (think arbiter).
 
 ## Services
 These are helpers like our OAuth system.
 
 ## Database
-Something to note, this project makes use of pools. Pools contain a pool of connections. In our project, we've defined 100 as the maximum number of connections at any given time. Every time we query, we make a new connection from the pool, lock on to the connection and release it (it's automatically released since we're using pools) back to the pool. 
+Something to note, this project makes use of pools. Pools contain a pool of connections. In our project, we've defined 100 as the maximum number of connections at any given time. Every time we query, we make a new connection from the pool, lock on to the connection and release it back to the pool. 
 
 We do this to achieve an asynchronous behavior because mysql is otherwise sequential, and will run queries one after another utilizing the same connection.
+
+The pool itself is a singleton because we really only ever need one.
+
+# MISC.
 
 ## Workflow
 1) Starting in the front-end, We import the actions folder (and thus, all the endpoints in it) to the component of interest
@@ -37,6 +41,34 @@ We do this to achieve an asynchronous behavior because mysql is otherwise sequen
 For context, a <Provider /> component (given by the react-redux library) takes in a store (from redux) and wraps around the root component (and in our case, the App.js component). This way, every action reducers return will be known by the store and thus, the root component and all of its children. There is logic in the components to hook up components with the store's reducers.
 
 6) With their newly received data, the components will re-render appropriately. Their render() will always trigger when the props change (or a setState()).
+
+## How to get the codebase working
+
+1) Clone the project into your local machine
+2) Run "npm install" under the client directory and the server directory. Npm will look at the respective package.json's dependencies and download the listed modules.
+3) Ask me for the dev.js keys
+
+## How does our Google OAuth work?
+
+1) In the frontend, the user will navigate to the "/auth/google" route (which we define) which is sent to our server. The express route lives in our authRoutes.js.
+2) This route takes in a "passport.authenticate('google')" parameter, which refers to the passport.use(...) method in passport.js. This is the configuration that specifies our google credentials so we can use the Google API; it also specifies the callback URL, which is the URL the user is redirected to once she's done OAuthing. In this case, it's "/auth/google/callback"
+3) So, the user will login using Google and on the way back, we check if this user is already in our database or not (Has she OAuthed before, in other words) with the given "profile" variable. See passport.js.
+4) If she hasn't, we call the insertUser endpoint to insert the new user model into the database
+5) If she has, we just retrieve the user model
+6) Next, we go to the callback URL (which again, is handled within the authRoutes.js). Here, we navigate to certain pages dependent if the user has set up her profile or not.
+
+## How to test the OAuth workflow
+
+1) If you have a test user already in the user table (in the database), delete it.
+2) This is not all, though, as going to the browser will return a failed "api/current_user" call to the server.
+
+The problem is, once you've gone through the OAuth process previously, Passport.js will deserialize the newly inserted model into a cookie for the browser to hold on to.
+
+So, when you go to the browser, it has the user's ID to attempt server requests. This obviously won't work because the model is deleted from the database.
+
+You'll have to clear your cookies in the browser (Application tab in the Chrome devtools)
+
+3) Lastly, restart your server. CTRL+C in the terminal and then run "npm run dev" in the server directory.
 
 # DEBUGGING
 
@@ -55,8 +87,6 @@ The best way to go about debugging the backend is to call the routes from the Re
 
 In the backend, you can console.log everything.
 
-## FAQ & MISC.
-
 ## How does our code even get to the server for us to see and play with?
 Before we start debugging, we have to understand how our code gets to the server (either remote server or a port on localhost) in the first place.
 
@@ -65,9 +95,6 @@ For our client-side code (React), we run "npm run start --prefix ./client". With
 How it all works together, when we run our backend server, we'll whip up a port that is an endpoint of communication; it'll talk to our server, whether that's hosted on the cloud or our local machine. Any requests we make to our Express routes via the browser (on the designated port) will give us back the response.
 
 As for the front-end, our script will bundle all of our JS, CSS and HTML and hand that to the browser for it to download and display.
-
-## How do modern web browsers (i.e Chrome) work behind the hood?
-No idea.
 
 ## What's bundling and minification?
 1) Bundling combines (or bundles) multiple files into a single file (i.e CSS bundles, JS bundles, etc). Fewer files means fewer HTTP requests to retrieve them, which means better page load performance.
