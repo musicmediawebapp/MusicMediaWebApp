@@ -19,16 +19,16 @@ export var submitWorkflow = (formData, history) => {
         // User finished the workflow set up, so set the flag to true
         formData.isProfileSetUp = true;
         // Insert or update the user model to the backend
-        var res = await axios.post('/api/user', formData);
-        // Upon a successful workflow set up, redirect to the dashboard
-        if (res.status === 200) {
-            history.push({
-                pathname: '/dashboard',
-                state: { finishedWorkflow: true }
-            });            
-        }
-        else {
-            history.push('/error');
+        try {
+            var res = await axios.post('/api/user', formData);
+            if (res.status === 200) {
+                return history.push({
+                    pathname: '/dashboard',
+                    state: { finishedWorkflow: true }
+                });     
+            }
+        } catch (err) {
+            return history.push('/error');
         }
     }
 }

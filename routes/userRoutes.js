@@ -10,8 +10,7 @@ module.exports = app => {
             if (insertedId === 0 || insertedId === user.id) {
                 return res.sendStatus(200);                            
             }
-            // TODO_MINH: Send an appropriate error to handle by the front-end
-            return res.send({});
+            return res.sendStatus(403);
         });
     });
 }

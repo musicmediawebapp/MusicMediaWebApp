@@ -6,6 +6,7 @@ class Dashboard extends Component {
 
     componentDidMount() {
         var { location } = this.props;
+        // Toast if the user just finished the workflow
         if (location.state && location.state.finishedWorkflow) {
             toast("You have completed the setup!");
         }
@@ -16,7 +17,6 @@ class Dashboard extends Component {
             <div>
                 <h2>Dashboard</h2>
 
-                {/* Toast if the user just finished the workflow */}
                 <ToastContainer 
                     position="top-right"
                     type="default"
