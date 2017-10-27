@@ -5,7 +5,7 @@ module.exports = app => {
 
         dbService.replaceUserOnDuplicate(req.body, function returnResponse(insertedId) {
             var user = req.body; // Syntactic sugar
-            dbService.insertActivityLog(user.id, user.firstName, user.lastName, "User has finished the setup workflow");
+            dbService.insertActivityLog(user.id, "User has finished the setup workflow");
 
             if (insertedId === 0 || insertedId === user.id) {
                 return res.sendStatus(200);                            
