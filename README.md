@@ -6,9 +6,12 @@ Everything within the client directory is the front-end resources (including Rea
 
 Specifics, we use Redux (and Redux form) to make HTTP requests to our backend. These endpoints live within the /client/src/actions directory.
 
+### Components
 Another technology we use is redux-form. We import its reducer into our reducers folder (under the combineReducers({})) and add it as a key so that our components can have access to it. How to allow React components to talk to our redux store (which again, contains all of our reducers), we import a redux-form helper into our components. That's all of the hard work we have to do. Outside of that, redux-form will call action creators (upon form changes), updates the state in redux store. All we have to do is hook it with reduxForm() instead of connect().
 
-Low-level, we use <Field /> components to render HTML elements on our redux forms. It takes in a name attribute, which when the <Field /> takes in some value, that value will be stored in the redux store (aka called an action creator, returned a dispatched action) under the key of said name. 
+Low-level, we use <Field /> components to render HTML elements on our redux forms. It takes in a name attribute, which when the <Field /> takes in some value, that value will be stored in the redux store (aka called an action creator, returned a dispatched action) under the key of said name.
+
+For our components, we use JSX which is a Javascript syntax extension. It mimics HTML elements but behind the scenes, the React library converts it to Javascript.
 
 ## Config
 The config folder stores all of our configurations, both for development and production. Obviously, the dev.js keys are not on Github. Ask me for them if you need them. As for the prod.js keys, they point to the environmental variables on the Heroku servers. When our application runs (either on Heroku or locally), the process.env variables to see if we're in production or development mode, and subsequently see which set of keys to use.

@@ -10,8 +10,7 @@ import Header from './Header'; // Will always show this header
 import Landing from './Landing'; // Below header in the front page
 import Workflow from './setup/Workflow';
 import Error from './Error/Error';
-
-var Dashboard = () => <h2>Dashboard</h2> // Once logged in
+import Dashboard from './Dashboard/Dashboard';
 
 class App extends Component {
     componentDidMount() {
