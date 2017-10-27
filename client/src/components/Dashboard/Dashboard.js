@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
+import Materialize from 
 
 class Dashboard extends Component {
+
+    componentDidMount() {
+        var { finishedWorkflow } = this.props.location.state;
+    }
+
     render() {
         return (
             <div>
@@ -9,3 +16,5 @@ class Dashboard extends Component {
         );
     }
 }
+
+export default withRouter(Dashboard);

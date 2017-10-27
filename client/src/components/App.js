@@ -24,7 +24,7 @@ class App extends Component {
                     <div>
                         <Header />
                         <Switch>
-                            {/* The langing page users see when they're not logged in */}
+                            {/* The landing page users see when they're not logged in */}
                             <Route exact path="/" component={Landing} />
 
                             {/* Once the user is logged in, all of the app's features and functionality is here */}

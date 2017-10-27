@@ -25,7 +25,7 @@ module.exports = {
     insertActivityLog: function(ID, action) {
         this.tryConnect().getConnection(function (err, con) {
             var sql = queries.insertActivityLog;
-            con.query(sql, [ID, firstName, lastName, action], function (err, result) {
+            con.query(sql, [ID, action], function (err, result) {
                 if (err) throw err;
                 con.release();
             });
