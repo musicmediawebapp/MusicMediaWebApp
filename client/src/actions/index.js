@@ -14,6 +14,7 @@ export var fetchUser = () => {
 /* Param1 (values): our workflowForm key under the redux-form reducer
    Param2 (history): helps navigate to /dashboard */
 export var submitWorkflow = (formData, history) => {
+
     return async function(dispatch) {
         // User finished the workflow set up, so set the flag to true
         formData.isProfileSetUp = true;
@@ -21,7 +22,10 @@ export var submitWorkflow = (formData, history) => {
         var res = await axios.post('/api/user', formData);
         // Upon a successful workflow set up, redirect to the dashboard
         if (res.status === 200) {
-            history.push('/dashboard');            
+            history.push({
+                pathname: '/dashboard',
+                state: { finishedWorkflow: true }
+            });            
         }
         else {
             history.push('/error');
