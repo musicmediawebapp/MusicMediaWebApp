@@ -5,6 +5,8 @@ var assert = chai.assert;
 var should = chai.should();
 var chaiHttp = require('chai-http');
 var sinon = require('sinon');
+var mockReq = require('sinon-express-mock').mockReq;
+var mockRes = require('sinon-express-mock').mockRes;
 
 var server = require('../../index');
 
@@ -14,18 +16,17 @@ chai.use(chaiHttp);
 
 describe('Test', function() {
     beforeEach(function() {
+
         var getUserByIDStubE = sinon.stub(dbService, 'getUserByID').callsFake(cb => {
             cb(undefined, 5);
         });
-
-        var req = new Request();
-        req.body = 34;
+ 
       });
 
-    it('TESTSETSTETS', function(done) {        
+    it('TESTSETSTETS', function(done) {       
         chai.request(server)
             .get('/test')
-            .send({ req })
+            .send({  })
             .end(function (err, res) {
                 res.body.result.should.equal(5);
                 done();
