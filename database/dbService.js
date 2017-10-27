@@ -22,7 +22,7 @@ module.exports = {
         });
     },
 
-    insertActivityLog: function(ID, firstName, lastName, action) {
+    insertActivityLog: function(ID, action) {
         this.tryConnect().getConnection(function (err, con) {
             var sql = queries.insertActivityLog;
             con.query(sql, [ID, firstName, lastName, action], function (err, result) {
