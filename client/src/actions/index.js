@@ -10,7 +10,6 @@ export var fetchUser = () => {
 };
 
 
-/* NON-ACTION CREATOR ENDPOINTS */
 /* Param1 (values): our workflowForm key under the redux-form reducer
    Param2 (history): helps navigate to /dashboard */
 export var submitWorkflow = (formData, history) => {

@@ -12,20 +12,25 @@ class Dashboard extends Component {
         }
     }
 
+    renderToasts() {
+        return (
+            <ToastContainer 
+            position="top-right"
+            type="default"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            pauseOnHover
+            />
+        );
+    }
+
     render() {
         return (
             <div>
                 <h2>Dashboard</h2>
-
-                <ToastContainer 
-                    position="top-right"
-                    type="default"
-                    autoClose={5000}
-                    hideProgressBar={false}
-                    newestOnTop={false}
-                    closeOnClick
-                    pauseOnHover
-                />
+                {this.renderToasts()}
             </div>
         );
     }
