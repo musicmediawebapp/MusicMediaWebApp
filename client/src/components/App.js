@@ -11,6 +11,7 @@ import Landing from './Landing'; // Below header in the front page
 import Workflow from './setup/Workflow';
 import Error from './Error/Error';
 import Dashboard from './Dashboard/Dashboard';
+import Personal from './Personal/Personal';
 
 class App extends Component {
     componentDidMount() {
@@ -29,6 +30,9 @@ class App extends Component {
 
                             {/* Once the user is logged in, all of the app's features and functionality is here */}
                             <Route exact path="/dashboard" component={Dashboard} />
+
+                            {/* Users can look at their profile to update any personal information */}
+                            <Route exact path="/profile" component={Personal} />
 
                             {/* This route is the setup workflow */}
                             <Route exact path="/workflow" component={Workflow} />
