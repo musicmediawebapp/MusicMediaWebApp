@@ -3,7 +3,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 import { Switch } from 'react-router';
-import styles from '../styles/global.css';
+import '../styles/global.css';
 
 // Component imports
 import Header from './Header'; // Will always show this header

@@ -7,6 +7,12 @@ import { fetchUser } from '../../actions/index';
 import { connect } from 'react-redux';
 
 class Personal extends Component {
+    componentWillReceiveProps({ formValues}) {
+        if (formValues.values !== undefined) {
+            console.log(formValues);
+        }
+    }
+
     renderFields() {
         return _.map(formFields, ({ key, type, label, name, component }) => {
             return (
@@ -23,7 +29,7 @@ class Personal extends Component {
 
     render() {
         var { handleSubmit } = this.props;
-        return(
+        return (
             <div>
                 <form onSubmit={handleSubmit}>
                     {this.renderFields()}
@@ -49,4 +55,12 @@ Personal = connect(
     {load: fetchUser} // bind loading action creator
 )(Personal);
 
-export default Personal;
+
+// We use the "connect" library to reach this redux-form reducer
+function mapStateToProps({ form: personalForm }) {
+    return {
+        formValues: personalForm
+    };
+}
+
+export default connect(mapStateToProps)(Personal);
