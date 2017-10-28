@@ -5,6 +5,7 @@ import formFields from './FormFields';
 import _ from 'lodash';
 import { fetchUser } from '../../actions/index';
 import { connect } from 'react-redux';
+import * as actions from '../../actions/index';
 
 class Personal extends Component {
     componentWillReceiveProps({ formValues }) {
@@ -12,6 +13,11 @@ class Personal extends Component {
         if (typeof formValues.values !== "undefined") {
             formValues.values.formType = "profile";
         }
+    }
+
+    handleSubmit(event) {
+        var { values } = this.props.formValues;
+        event.preventDefault();
     }
 
     renderFields() {
@@ -29,13 +35,12 @@ class Personal extends Component {
     }
 
     render() {
-        var { handleSubmit } = this.props;
         return (
             <div>
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={this.handleSubmit.bind(this)}>
                     {this.renderFields()}
                     <button className="teal btn-flat right white-text" type="submit">
-                        Next
+                        Update
                         <i className="material-icons right">done</i>
                     </button>
                 </form>
@@ -64,4 +69,4 @@ function mapStateToProps({ form: { personalForm } }) {
     };
 }
 
-export default connect(mapStateToProps)(Personal);
+export default connect(mapStateToProps, actions)(Personal);
