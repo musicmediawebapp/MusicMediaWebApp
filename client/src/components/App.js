@@ -32,7 +32,7 @@ class App extends Component {
                             <Route exact path="/dashboard" component={Dashboard} />
 
                             {/* Users can look at their profile to update any personal information */}
-                            <Route exact path="/profile" component={Personal} />
+                            <Route exact path="/profile/:id" component={Personal} />
 
                             {/* This route is the setup workflow */}
                             <Route exact path="/workflow" component={Workflow} />
