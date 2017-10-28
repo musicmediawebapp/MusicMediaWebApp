@@ -9,6 +9,9 @@ module.exports = app => {
             if (user.formType === "workflow") {
                 dbService.insertActivityLog(user.id, "User has finished the setup workflow");
             }
+            else if (user.formType === "profile") {
+                dbService.insertActivityLog(user.id, "User has updated her/his profile");
+            }
 
             if (insertedId === 0 || insertedId === user.id) {
                 return res.sendStatus(200);                            

@@ -6,6 +6,8 @@ import _ from 'lodash';
 import { fetchUser } from '../../actions/index';
 import { connect } from 'react-redux';
 import * as actions from '../../actions/index';
+import { withRouter } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
 
 class Personal extends Component {
     componentWillReceiveProps({ formValues }) {
@@ -15,9 +17,14 @@ class Personal extends Component {
         }
     }
 
-    handleSubmit(event) {
-        var { values } = this.props.formValues;
+    async handleSubmit(event) {
+        var { formValues, history, submitWorkflow } = this.props;
         event.preventDefault();
+
+        var successfullySubmission = await submitWorkflow(formValues.values, history);
+        if (successfullySubmission) {
+            toast("You have updated your profile!");
+        }
     }
 
     renderFields() {
@@ -42,6 +49,16 @@ class Personal extends Component {
                         <i className="material-icons right">done</i>
                     </button>
                 </form>
+
+                <ToastContainer 
+                    position="top-right"
+                    type="default"
+                    autoClose={5000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    pauseOnHover
+                />
             </div>
         );
     }
@@ -67,4 +84,4 @@ function mapStateToProps({ form: { personalForm } }) {
     };
 }
 
-export default connect(mapStateToProps, actions)(Personal);
+export default connect(mapStateToProps, actions)(withRouter(Personal));
