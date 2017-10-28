@@ -7,9 +7,10 @@ import { fetchUser } from '../../actions/index';
 import { connect } from 'react-redux';
 
 class Personal extends Component {
-    componentWillReceiveProps({ formValues}) {
-        if (formValues.values !== undefined) {
-            console.log(formValues);
+    componentWillReceiveProps({ formValues }) {
+        // The redux-form reducer will retrieve our personalForm on the second render
+        if (typeof formValues.values !== "undefined") {
+            formValues.values.formType = "profile";
         }
     }
 
@@ -57,7 +58,7 @@ Personal = connect(
 
 
 // We use the "connect" library to reach this redux-form reducer
-function mapStateToProps({ form: personalForm }) {
+function mapStateToProps({ form: { personalForm } }) {
     return {
         formValues: personalForm
     };
