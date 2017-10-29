@@ -1,4 +1,4 @@
-import RenderField from '../../utils/RenderField/RenderField';
+import RenderField from '../../../utils/RenderField/RenderField';
 
 export default [
     { key: 1, type: "text", label: "First Name", name:"firstName", component:{RenderField} },

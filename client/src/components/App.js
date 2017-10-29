@@ -3,7 +3,7 @@ import { Router, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 import { Switch } from 'react-router';
-import history from './utils/History';
+import history from '../utils/History';
 import '../styles/global.css';
 
 // Component imports

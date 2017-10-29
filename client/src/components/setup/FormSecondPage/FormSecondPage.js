@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form';
 import './FormSecondPage.css';
-import validate from '../../utils/ValidateWorkflow';
+import validate from '../../../utils/ValidateWorkflow';
 import _ from 'lodash';
 import FormFields from './FormFields';
 

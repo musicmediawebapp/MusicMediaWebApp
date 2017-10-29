@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import errorToast from '../utils/Toasts/default';
+import errorToast from '../../utils/Toasts/default';
 import './Error.css';
 
 class Error extends Component {
