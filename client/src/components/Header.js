@@ -4,8 +4,9 @@ import { Link } from 'react-router-dom';
 
 class Header extends Component {
     renderContent() {
+        var { auth: user } = this.props;
         // Access to the authReducer, which gives us the payload.action (User model)
-        switch(this.props.auth) {
+        switch(user) {
             case null:
                 return;
             case false:
@@ -13,16 +14,27 @@ class Header extends Component {
                     <li><a href="/auth/google">Login with Google</a></li>
                 );
             default:
-                return <li><a href="/api/logout">Log out</a></li>;
+                return (
+                    <div>
+                        <li>
+                            <Link
+                                to={"/profile/" + user.id}>
+                                Profile
+                            </Link>
+                        </li>
+                        <li><a href="/api/logout">Log out</a></li>
+                    </div>  
+                );
         }
     }
 
     render() {
+        var { auth: user } = this.props;
         return (
             <nav>
                 <div className="nav-wrapper">
                     <Link 
-                        to={this.props.auth ? '/dashboard' : '/'}
+                        to={user ? '/dashboard' : '/'}
                         className="left brand-logo">
                         Music Media
                     </Link>

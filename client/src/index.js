@@ -1,4 +1,5 @@
 import 'materialize-css/dist/css/materialize.min.css'; // Imports CSS. Webpack will find this and load it.
+import 'react-toastify/dist/ReactToastify.min.css';
 import React from 'react';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
