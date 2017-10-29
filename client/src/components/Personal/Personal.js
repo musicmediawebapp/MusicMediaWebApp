@@ -7,8 +7,9 @@ import { fetchUser } from '../../actions/index';
 import { connect } from 'react-redux';
 import * as actions from '../../actions/index';
 import { withRouter } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
+import updateProfileToast from '../utils/Toasts/default';
 
 class Personal extends Component {
     constructor(props) {
@@ -72,20 +73,6 @@ class Personal extends Component {
         });
     }
 
-    renderToasts() {
-        return (
-            <ToastContainer 
-            position="top-right"
-            type="default"
-            autoClose={5000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            pauseOnHover
-            />
-        );
-    }
-
     render() {
         return (
             <div>
@@ -99,7 +86,7 @@ class Personal extends Component {
                         <i className="material-icons right">done</i>
                     </button>
                 </form>
-                {this.renderToasts()}      
+                {updateProfileToast}      
             </div>
         );
     }

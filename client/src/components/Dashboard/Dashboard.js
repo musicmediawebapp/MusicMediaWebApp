@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
+import completeWorkflowToast from '../utils/Toasts/default';
 
 class Dashboard extends Component {
 
@@ -12,25 +13,11 @@ class Dashboard extends Component {
         }
     }
 
-    renderToasts() {
-        return (
-            <ToastContainer 
-            position="top-right"
-            type="default"
-            autoClose={5000}
-            hideProgressBar={false}
-            newestOnTop={false}
-            closeOnClick
-            pauseOnHover
-            />
-        );
-    }
-
     render() {
         return (
             <div>
                 <h2>Dashboard</h2>
-                {this.renderToasts()}
+                {completeWorkflowToast}
             </div>
         );
     }
