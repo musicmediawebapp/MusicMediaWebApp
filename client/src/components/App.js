@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { Router, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 import { Switch } from 'react-router';
+import history from '../utils/History';
 import '../styles/global.css';
 
 // Component imports
@@ -14,16 +15,33 @@ import Dashboard from './Dashboard/Dashboard';
 import Personal from './Personal/Personal';
 
 class App extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            currentURL: "/"
+        }
+    }
     componentDidMount() {
         this.props.fetchUser();
+
+        // Listen to the URL for route changes and update the currentURL state accordingly
+        this.unlisten = history.listen((location) => {
+            this.setState({ currentURL: location.pathname });
+        });
+    }
+
+    componentWillUnmount() {
+        this.unlisten();
     }
 
     render() {
         return (
             <div className="container">
-                <BrowserRouter>
+                <Router history={history}>
                     <div>
-                        <Header />
+                        {/* Do not show the header when we're in the errors page */}
+                        {this.state.currentURL.includes('error') ? null : <Header />}
                         <Switch>
                             {/* The landing page users see when they're not logged in */}
                             <Route exact path="/" component={Landing} />
@@ -43,7 +61,7 @@ class App extends Component {
                             <Route exact path="*" component={Error} />
                         </Switch>
                     </div>
-                </BrowserRouter>
+                </Router>
             </div>
         );
     }

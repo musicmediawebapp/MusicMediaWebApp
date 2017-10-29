@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form';
-import validate from '../../utils/ValidateWorkflow';
+import validate from '../../../utils/ValidateWorkflow';
 import formFields from './FormFields';
 import _ from 'lodash';
 import { fetchUser } from '../../../actions/index';

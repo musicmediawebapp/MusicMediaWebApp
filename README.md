@@ -36,6 +36,11 @@ The pool itself is a singleton because we really only ever need one.
 
 # MISC.
 
+## Before you submit a pull request, ask yourself...
+1) Do you need to add anything to the activity log?
+2) Do you have to add any unit tests?
+3) Do you have to handle errors and if so, direct them to our errors page?
+
 ## Workflow
 1) Starting in the front-end, We import the actions folder (and thus, all the endpoints in it) to the component of interest
 2) These endpoints are passed in to the components as props. You can destructure these unless it's a class component (in which case, it's readily available without further logic)

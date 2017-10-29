@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form';
-import validate from '../utils/ValidateWorkflow';
+import validate from '../../utils/ValidateWorkflow'
 import FormFields from './FormFields';
 import _ from 'lodash';
 import { fetchUser } from '../../actions/index';
@@ -9,7 +9,7 @@ import * as actions from '../../actions/index';
 import { withRouter } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
-import updateProfileToast from '../utils/Toasts/default';
+import updateProfileToast from '../../utils/Toasts/default';
 
 class Personal extends Component {
     constructor(props) {
