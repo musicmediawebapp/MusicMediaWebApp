@@ -11,22 +11,53 @@ import { ToastContainer, toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
 
 class Personal extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            originalForm: null, // Null at initial state. We wait for redux-form to give us the second value
+            firstRender: true
+        }
+    }
+
     componentWillReceiveProps({ formValues }) {
+        var { firstRender } = this.state;
+
         // The redux-form reducer will retrieve our personalForm on the second render
         if (typeof formValues.values !== "undefined") {
             formValues.values.formType = "profile";
+
+            // After the originalForm has been set the first time, we do not want to update it every time
+            // the user updates the redux-form form. The purpose is to compare the original and the proposed forms on submission.
+            // If there are no changes, do not call the backend endpoint to update the user model
+            if (firstRender) {
+                this.setState({ originalForm: formValues.values });
+                this.setState({ firstRender: false });
+            }
         }
     }
 
     /* Submits the profile form in the database and return a toast upon success */
-    async handleSubmit(event) {
+    async submitForm(event) {
+        // Set up
         var { formValues, history, submitWorkflow } = this.props;
         event.preventDefault();
+
+        // Check if we even have to do an update (aka did the user even make any changes?)
+        var madeNoChanges = this.compareForms(this.state.originalForm, this.props.formValues.values);
+        if (madeNoChanges) {
+            toast("You made no changes yet!");
+            return;
+        }
 
         var successfullySubmission = await submitWorkflow(formValues.values, history);
         if (successfullySubmission) {
             toast("You have updated your profile!");
         }
+    }
+
+    compareForms(originalForm, newForm) {
+        return JSON.stringify(originalForm) === JSON.stringify(newForm);
     }
 
     renderFields() {
@@ -58,7 +89,7 @@ class Personal extends Component {
     render() {
         return (
             <div>
-                <form onSubmit={this.handleSubmit.bind(this)}>
+                <form onSubmit={this.submitForm.bind(this)}>
                     {this.renderFields()}
                     <Link to={'/dashboard'} className="teal btn-flat left white-text">
                         Back
