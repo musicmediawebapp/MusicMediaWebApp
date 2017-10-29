@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import * as actions from '../actions';
 import './App.css';
 import { Switch } from 'react-router';
+import styles from '../styles/global.css';
 
 // Component imports
 import Header from './Header'; // Will always show this header

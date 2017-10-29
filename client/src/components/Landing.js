@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import './Landing.css';
 
 class Landing extends Component {
     render() {
         return(
             <div>
-                <div id="landing">
-                    <img src={require('../assets/images/landing-temp.jpg')} alt="" />
+                <div id="background">
+                    <img src={require('../assets/images/landing-temp.jpg')} alt="" />  
+                    <ul id="main-text">You're listening to</ul>
                 </div>
                 <div> 
                     
@@ -16,4 +18,7 @@ class Landing extends Component {
     }
 }
 
-export default Landing;
+function mapStateToProps(state) {
+    return { auth: state.auth };
+}
+export default connect(mapStateToProps)(Landing);

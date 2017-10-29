@@ -8,7 +8,7 @@ module.exports = {
     insertUser: function(user, callback) {
         this.tryConnect().getConnection(function(err, con) {
             var sql = queries.insertUser;
-            con.query(sql, [user.id, user.gender, user.name.givenName, user.name.familyName, user.emails[0].value, user._json.placesLived[0].value, user.phoneNumber]
+            con.query(sql, [user.id, user.gender, user.name.givenName, user.name.familyName, user.emails[0].value, null, user.phoneNumber]
             , function (err, result) {
                 con.release();                
                 if (err) throw err;
@@ -47,6 +47,8 @@ module.exports = {
 
     /* Retrieves a User model by ID */
     getUserByID: function(ID, callback) {
+
+        console.log(ID);
         this.tryConnect().getConnection(function(err, con) {
             var sql = queries.getUserByID;
             con.query({sql, 
