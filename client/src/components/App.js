@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { Router, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 import { Switch } from 'react-router';
@@ -31,7 +31,7 @@ class App extends Component {
     render() {
         return (
             <div className="container">
-                <BrowserRouter>
+                <Router history={history}>
                     <div>
                         <Header />
                         <Switch>
@@ -50,7 +50,7 @@ class App extends Component {
                             <Route exact path="*" component={Error} />
                         </Switch>
                     </div>
-                </BrowserRouter>
+                </Router>
             </div>
         );
     }
