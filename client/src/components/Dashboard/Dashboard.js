@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import completeWorkflowToast from '../utils/Toasts/default';
+import completeWorkflowToast from '../../utils/Toasts/default';
 
 class Dashboard extends Component {
 

@@ -31,7 +31,12 @@ export var submitWorkflow = (formData, history) => {
                 return "Success";
             }
         } catch (err) {
-            return history.push('/error');
+            var errorMessage = (formData.formType === "workflow" ? "An error occurred during the workflow" :
+                                                               "Failed to update profile");
+            return history.push({
+                pathname: '/error',
+                state: { message: errorMessage }
+            });
         }
     }
 }
