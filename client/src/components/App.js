@@ -15,12 +15,19 @@ import Error from './Error/Error';
 var Dashboard = () => <h2>Dashboard</h2> // Once logged in
 
 class App extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            currentURL: ""
+        }
+    }
     componentDidMount() {
         this.props.fetchUser();
 
-        // Listen to the URL for route changes
+        // Listen to the URL for route changes and update the currentURL state accordingly
         this.unlisten = history.listen((location) => {
-            console.log(location);
+            this.setState({ currentURL: location.pathname });
         });
     }
 
@@ -33,7 +40,8 @@ class App extends Component {
             <div className="container">
                 <Router history={history}>
                     <div>
-                        <Header />
+                        {/* Do not show the header when we're in the errors page */}
+                        {this.state.currentURL.includes('error') ? null : <Header />}
                         <Switch>
                             {/* The langing page users see when they're not logged in */}
                             <Route exact path="/" component={Landing} />
