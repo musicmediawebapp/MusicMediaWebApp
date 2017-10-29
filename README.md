@@ -1,6 +1,8 @@
 # MUSIC MEDIA STRUCTURE
 Think Twitter but for music. Ye, that's what this is.
 
+The deployment is currently broken but the live site can be found here: https://protected-lowlands-14456.herokuapp.com/
+
 ## Client
 Everything within the client directory is the front-end resources (including React, Redux). This serves as the UI for our web application.
 
