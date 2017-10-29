@@ -15,22 +15,30 @@
 #now-playing img {
     position: absolute;
     bottom:0; left: 0; right:0;
-    top: 300px; 
+    top: 110px; 
     display: block;
     margin: 0 auto;
     z-index: 2;
     width: 350px;
     height: 350px;
 }
-
-#now-playing-text {
+.now-playing-text {
+    top: 100px;
     position: absolute;
-    z-index: 3;
+    display: block;
+    width: 100%;
+    z-index: 2;
     text-align: center;
     color: white;
+}
+
+#main-text {
     top: 100px;
-    left: 0;
-    width: 100%;
     font-size: 70px;
+}
+
+.song-info {
+    padding-top: 370px;
+    font-size: 30px;
 }
 

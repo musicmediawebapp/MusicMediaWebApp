@@ -8,11 +8,17 @@ class Landing extends Component {
             <div>
                 <div id="background">
                     <img src={require('../assets/images/landing-temp.jpg')} alt="" />  
-                    
+                
                     <div id="now-playing">
-                    <ul id="now-playing-text">You're listening to</ul>
-                    <img src={require('../assets/images/album-temp.jpg')} alt="" />
-                </div>
+                        <div class="now-playing-text">
+                            <div id="main-text">You're listening to</div>
+                            <img src={require('../assets/images/album-temp.jpg')} alt="" />
+                            <div class="song-info"> 
+                                <div id="song-title">Song</div>
+                                <div id="artist-name">Artist</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         );
