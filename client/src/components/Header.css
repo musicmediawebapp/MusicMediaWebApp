@@ -5,10 +5,10 @@
     position: fixed;
 }
 
-
 .header:hover {
     box-shadow: 0 2px 0 white;
 }
+
 .brand-logo {
     font-size: 20px;
     margin-top: 6px;
