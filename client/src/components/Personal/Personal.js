@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import * as actions from '../../actions/index';
 import { withRouter } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
+import { Link } from 'react-router-dom';
 
 class Personal extends Component {
     componentWillReceiveProps({ formValues }) {
@@ -59,6 +60,9 @@ class Personal extends Component {
             <div>
                 <form onSubmit={this.handleSubmit.bind(this)}>
                     {this.renderFields()}
+                    <Link to={'/dashboard'} className="teal btn-flat left white-text">
+                        Back
+                    </Link>
                     <button className="teal btn-flat right white-text" type="submit">
                         Update
                         <i className="material-icons right">done</i>
