@@ -4,7 +4,10 @@ module.exports = app => {
     app.post('/api/user', (req, res) => {
 
         dbService.replaceUserOnDuplicate(req.body, function returnResponse(insertedId) {
-            if (insertedId === 0 || insertedId === req.body.id) {
+            var user = req.body; // Syntactic sugar
+            dbService.insertActivityLog(user.id, "User has finished the setup workflow");
+
+            if (insertedId === 0 || insertedId === user.id) {
                 return res.sendStatus(200);                            
             }
             // TODO_MINH: Send an appropriate error to handle by the front-end
