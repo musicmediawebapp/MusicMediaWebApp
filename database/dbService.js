@@ -15,19 +15,19 @@ module.exports = {
             var sql = queries.insertUser;
             con.query(sql, [user.id, user.gender, user.name.givenName, user.name.familyName, user.emails[0].value, placesLived, user.phoneNumber]
             , function (err, result) {
+                con.release();                                                
                 if (err) throw err;
-                callback(result.insertId);
-                con.release();                                
+                return callback(result.insertId);
             });
         });
     },
 
-    insertActivityLog: function(ID, firstName, lastName, action) {
+    insertActivityLog: function(ID, action) {
         this.tryConnect().getConnection(function (err, con) {
             var sql = queries.insertActivityLog;
-            con.query(sql, [ID, firstName, lastName, action], function (err, result) {
+            con.query(sql, [ID, action], function (err, result) {
+                con.release();                
                 if (err) throw err;
-                con.release();
             });
         });
     },
@@ -40,9 +40,9 @@ module.exports = {
                  // On Duplicate Key Update parameters
                  user.googleID, user.gender, user.firstName, user.lastName, user.email, user.isProfileSetUp, user.location, user.phoneNumber], 
                  function (err, result) {
+                con.release();                       
                 if (err) throw err;
-                callback(result.insertId);
-                con.release();                
+                return callback(result.insertId);
             });
         });
     },
@@ -52,10 +52,10 @@ module.exports = {
         this.tryConnect().getConnection(function(err, con) {
             var sql = queries.getUserByGoogleID;
             con.query(sql, googleID, function (err, result) {
+                con.release();                                                
                 if (err) throw err;
                 // Call the callback function in the caller of this method so we can do something with this "result"
-                callback(result); // [] if not found
-                con.release();                                
+                return callback(result); // [] if not found
             });
         });
     },
