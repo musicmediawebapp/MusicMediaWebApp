@@ -4,6 +4,11 @@ import * as actions from '../../actions';
 import { withRouter } from 'react-router-dom';
 
 class FormThirdPage extends Component {
+    componentDidMount() {
+        // Send an indicator that this is an update to the user model via workflow before submitting the form
+        this.props.formValues.formType = "workflow";
+    }
+
     render() {
         var { previousPage, formValues, submitWorkflow, history } = this.props;
         return (

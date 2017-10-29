@@ -10,21 +10,28 @@ export var fetchUser = () => {
 };
 
 
-/* NON-ACTION CREATOR ENDPOINTS */
-/* Param1 (values): our workflowForm key under the redux-form reducer
-   Param2 (history): helps navigate to /dashboard */
+/* Param1 (formData): the value of the key under the redux-form reducer
+   Param2 (history): helps navigation */
 export var submitWorkflow = (formData, history) => {
+
     return async function(dispatch) {
-        // User finished the workflow set up, so set the flag to true
-        formData.isProfileSetUp = true;
+        // If we're in the workflow and the user finished the workflow set up, set the flag to true
+        if (formData.formType === "workflow") { formData.isProfileSetUp = true; }
+
         // Insert or update the user model to the backend
-        var res = await axios.post('/api/user', formData);
-        // Upon a successful workflow set up, redirect to the dashboard
-        if (res.status === 200) {
-            history.push('/dashboard');            
-        }
-        else {
-            history.push('/error');
+        try {
+            var res = await axios.post('/api/user', formData);
+            if (res.status === 200 && formData.formType === "workflow") {
+                return history.push({
+                    pathname: '/dashboard',
+                    state: { finishedWorkflow: true }
+                });     
+            }
+            else if (res.status === 200 && formData.formType === "profile") {
+                return "Success";
+            }
+        } catch (err) {
+            return history.push('/error');
         }
     }
 }
