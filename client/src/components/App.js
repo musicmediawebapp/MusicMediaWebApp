@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import * as actions from '../actions';
 import { Switch } from 'react-router';
 import styles from '../styles/global.css';
+import history from './utils/History';
 
 // Component imports
 import Header from './Header'; // Will always show this header
@@ -16,6 +17,15 @@ var Dashboard = () => <h2>Dashboard</h2> // Once logged in
 class App extends Component {
     componentDidMount() {
         this.props.fetchUser();
+
+        // Listen to the URL for route changes
+        this.unlisten = history.listen((location) => {
+            console.log(location);
+        });
+    }
+
+    componentWillUnmount() {
+        this.unlisten();
     }
 
     render() {
