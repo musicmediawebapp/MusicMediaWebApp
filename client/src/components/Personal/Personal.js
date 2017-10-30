@@ -21,6 +21,10 @@ class Personal extends Component {
         }
     }
 
+    componentDidMount() {
+        this.props.showHeader();
+    }
+
     componentWillReceiveProps({ formValues }) {
         var { firstRender } = this.state;
 

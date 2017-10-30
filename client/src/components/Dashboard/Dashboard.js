@@ -6,6 +6,8 @@ import completeWorkflowToast from '../../utils/Toasts/default';
 class Dashboard extends Component {
 
     componentDidMount() {
+        this.props.showHeader();
+        
         var { location } = this.props;
         // Toast if the user just finished the workflow
         if (location.state && location.state.finishedWorkflow) {
