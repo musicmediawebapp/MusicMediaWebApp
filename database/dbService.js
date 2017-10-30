@@ -16,7 +16,10 @@ module.exports = {
             con.query(sql, [user.id, user.gender, user.name.givenName, user.name.familyName, user.emails[0].value, placesLived, user.phoneNumber]
             , function (err, result) {
                 con.release();                                                
-                if (err) throw err;
+                if (err) {
+                    this.insertError("There is an error inserting a user", err, "insertUser(user, callback)");                                        
+                    throw err;
+                }
                 return callback(result.insertId);
             });
         });
@@ -27,6 +30,19 @@ module.exports = {
             var sql = queries.insertActivityLog;
             con.query(sql, [ID, action], function (err, result) {
                 con.release();                
+                if (err) {
+                    this.insertError("There is an error inserting an entry", err, "insertActivityLog(ID, action)");                                        
+                    throw err;
+                }
+            });
+        });
+    },
+
+    insertError: function(message, exception, method) {
+        this.tryConnect().getConnection(function (err, con) {
+            var sql = queries.insertError;
+            con.query(sql, [message, exception, method], function (err, result) {
+                con.release();
                 if (err) throw err;
             });
         });
@@ -41,7 +57,10 @@ module.exports = {
                  user.googleID, user.gender, user.firstName, user.lastName, user.email, user.isProfileSetUp, user.location, user.phoneNumber], 
                  function (err, result) {
                 con.release();                       
-                if (err) throw err;
+                if (err) {
+                    this.insertError("There is an error inserting/updating a user", err, "replaceUserOnDuplicate(user, callback)");                                        
+                    throw err;
+                }
                 return callback(result.insertId);
             });
         });
@@ -53,7 +72,10 @@ module.exports = {
             var sql = queries.getUserByGoogleID;
             con.query(sql, googleID, function (err, result) {
                 con.release();                                                
-                if (err) throw err;
+                if (err) {
+                    this.insertError("There is an error retrieving the user by google ID", err, "getUserByGoogleID(googleID, callback)");                                        
+                    throw err;
+                }
                 // Call the callback function in the caller of this method so we can do something with this "result"
                 return callback(result); // [] if not found
             });
@@ -81,7 +103,10 @@ module.exports = {
                 return next();
             }}, ID, function (err, result) {
                 con.release();
-                if (err) throw err;
+                if (err) {
+                    this.insertError("There is an error retrieving the user by ID", err, "getUserByID(ID, callback)");                    
+                    throw err;
+                }
                 // Call the callback function in the caller of this method so we can do something with this "result"
                 return callback(result[0]); // [] if not found
             });
@@ -121,6 +146,7 @@ module.exports = {
                 console.log("Reconnecting");
                 tryConnect();
             } else {     
+                this.insertError("There is an error connecting to the mySQL server", err, "tryConnect()");
                 throw err;
             }
         });
