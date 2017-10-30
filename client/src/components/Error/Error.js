@@ -6,13 +6,15 @@ import './Error.css';
 
 class Error extends Component {
     componentDidMount() {
+        this.props.hideHeader();
+
         var { location } = this.props;
         // Toast the error message
         if (location.state && location.state.message) {
             toast(location.state.message);
         }
     }
-
+    
     render() {
         return (
             <div className="error-background">

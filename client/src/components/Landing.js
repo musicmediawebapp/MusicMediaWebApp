@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 
 class Landing extends Component {
+    componentDidMount() {
+        this.props.showHeader();
+    }
+
     render() {
         return(
             <div>

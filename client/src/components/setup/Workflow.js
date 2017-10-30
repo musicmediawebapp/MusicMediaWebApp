@@ -15,6 +15,10 @@ class Workflow extends Component {
         }
     }
 
+    componentDidMount() {
+        this.props.showHeader();
+    }
+
     nextPage() {
         this.setState({ page: this.state.page + 1 });
     }

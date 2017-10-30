@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { HashRouter as Router, Route } from 'react-router-dom';
+import { Router, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 import { Switch } from 'react-router';
@@ -18,52 +18,49 @@ class App extends Component {
     constructor(props) {
         super(props);
 
+        this.showHeader = this.showHeader.bind(this);
+        this.hideHeader = this.hideHeader.bind(this);
+        
         this.state = {
-            currentURL: "/"
+            hideHeader: false
         }
     }
     componentDidMount() {
         this.props.fetchUser();
-
-        // Listen to the URL for route changes and update the currentURL state accordingly
-        this.unlisten = history.listen((location) => {
-            this.setState({ currentURL: location.hash });
-        });
     }
 
-    componentWillUnmount() {
-        this.unlisten();
+    hideHeader() {
+        this.setState({ hideHeader: true });
     }
 
-    handleTest(value) {
-        console.log("received");
-        console.log(value);
+    showHeader() {
+        this.setState({ hideHeader: false });
     }
 
-    render() {
+    render() { 
         return (
             <div className="container">
-                <Router>
+                <Router history={history}>
                     <div>
                         {/* Do not show the header when we're in the errors page */}
-                        {this.state.currentURL.includes('error') ? null : <Header />}
+                        {this.state.hideHeader ? null : <Header />}
                         <Switch>
                             {/* The landing page users see when they're not logged in */}
-                            <Route exact path="/" component={Landing} />
+                            <Route exact path="/" render={() => <Landing showHeader={this.showHeader} />} />
 
                             {/* Once the user is logged in, all of the app's features and functionality is here */}
-                            <Route exact path="/dashboard" component={Dashboard} />
+                            <Route exact path="/dashboard" render={() => <Dashboard showHeader={this.showHeader} />} />
 
                             {/* Users can look at their profile to update any personal information */}
-                            <Route exact path="/profile/:id" component={Personal} />
+                            <Route exact path="/profile/:id" render={() => <Personal showHeader={this.showHeader} />} />
 
                             {/* This route is the setup workflow */}
-                            <Route exact path="/workflow" component={Workflow} />
+                            <Route exact path="/workflow" render={() => <Workflow showHeader={this.showHeader} />} />
 
                             {/* This is for any explicit redirects to the Error page */}
-                            <Route exact path="/error" component={Error} />
+                            <Route exact path="/error" render={() => <Error hideHeader={this.hideHeader} />} />
                             {/* Handle the edgecase in which the user types in a random URL or an unhandled URL */}
-                            <Route exact path="*" component={Error} />
+                            <Route exact path="*" render={() => <Error hideHeader={this.hideHeader} />} />
                         </Switch>
                     </div>
                 </Router>
