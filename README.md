@@ -24,6 +24,15 @@ The models for our middle-tier such as the User.js model. Any models returned fr
 ## Routes
 The routes folder has all of the backend Express route handling. Whenever a user routes around our application with data requests,Express will retrieve said requests from the database. This should contain most of the logic. It acts as a "controller" and will transform data as need be between the front-end and backend (think arbiter).
 
+### History
+The history object is a dependency of React Router, and the history object has many implementations. In our codebase, we use the browserHistory.
+
+You pass this type of history into the Route like so:
+
+<Router history={history} />
+
+In doing so, we have access to the router's history session. We can push, replace or pop routes on to the stack; we can go back or go forward; we also have access to the current location, pathname and state.
+
 ## Services
 These are helpers like our OAuth system.
 
