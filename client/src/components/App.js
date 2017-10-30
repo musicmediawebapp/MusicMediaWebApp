@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Router, Route } from 'react-router-dom';
+import { HashRouter as Router, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 import { Switch } from 'react-router';
@@ -27,7 +27,7 @@ class App extends Component {
 
         // Listen to the URL for route changes and update the currentURL state accordingly
         this.unlisten = history.listen((location) => {
-            this.setState({ currentURL: location.pathname });
+            this.setState({ currentURL: location.hash });
         });
     }
 
@@ -35,10 +35,15 @@ class App extends Component {
         this.unlisten();
     }
 
+    handleTest(value) {
+        console.log("received");
+        console.log(value);
+    }
+
     render() {
         return (
             <div className="container">
-                <Router history={history}>
+                <Router>
                     <div>
                         {/* Do not show the header when we're in the errors page */}
                         {this.state.currentURL.includes('error') ? null : <Header />}
