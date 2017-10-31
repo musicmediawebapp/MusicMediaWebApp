@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import { Router, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
-import * as actions from '../actions';
+import * as actions from '../../actions';
 import { Switch } from 'react-router';
-import history from '../utils/History';
-import '../styles/global.css';
+import history from '../../utils/History';
+import '../../styles/global.css';
 
 // Component imports
-import Header from './Header'; // Will always show this header
-import Landing from './Landing'; // Below header in the front page
-import Workflow from './setup/Workflow';
-import Error from './Error/Error';
-import Dashboard from './Dashboard/Dashboard';
-import Personal from './Personal/Personal';
+import Header from '../Header'; // Will always show this header
+import Landing from '../Landing'; // Below header in the front page
+import Workflow from '../setup/Workflow';
+import Error from '../Error/Error';
+import Dashboard from '../Dashboard/Dashboard';
+import Personal from '../Personal/Personal';
 
 class App extends Component {
     constructor(props) {
@@ -37,13 +37,14 @@ class App extends Component {
         this.setState({ hideHeader: false });
     }
 
+    
     render() { 
         return (
-            <div className="container">
-                <Router history={history}>
-                    <div>
-                        {/* Do not show the header when we're in the errors page */}
-                        {this.state.hideHeader ? null : <Header />}
+            <Router history={history}>
+                <div>
+                    {/* Do not show the header when we're in the errors page */}
+                    {this.state.hideHeader ? null : <Header />}
+                    <div className="container">
                         <Switch>
                             {/* The landing page users see when they're not logged in */}
                             <Route exact path="/" render={() => <Landing showHeader={this.showHeader} />} />
@@ -63,8 +64,8 @@ class App extends Component {
                             <Route exact path="*" render={() => <Error hideHeader={this.hideHeader} />} />
                         </Switch>
                     </div>
-                </Router>
-            </div>
+                </div>
+            </Router>
         );
     }
 };
