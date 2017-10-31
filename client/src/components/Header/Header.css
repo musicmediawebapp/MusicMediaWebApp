@@ -1,0 +1,15 @@
+/* Override Materialize's nav, making the nav thinner */
+nav {
+    line-height: 50px;
+    height: 50px;
+    background-color: white;
+}
+
+    nav ul a {
+        color: orange;
+    }
+
+/* The icon of our app */
+.library-music {
+    color: orange;
+}

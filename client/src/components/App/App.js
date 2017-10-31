@@ -7,7 +7,7 @@ import history from '../../utils/History';
 import '../../styles/global.css';
 
 // Component imports
-import Header from '../Header'; // Will always show this header
+import Header from '../Header/Header'; // Will always show this header
 import Landing from '../Landing'; // Below header in the front page
 import Workflow from '../setup/Workflow';
 import Error from '../Error/Error';
