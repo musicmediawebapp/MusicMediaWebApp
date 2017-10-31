@@ -49,6 +49,7 @@ The pool itself is a singleton because we really only ever need one.
 1) Do you need to add anything to the activity log?
 2) Do you have to add any unit tests?
 3) Do you have to handle errors and if so, direct them to our errors page?
+4) Adding on to the above point, do we need to log the error in our database?
 
 ## Workflow
 1) Starting in the front-end, We import the actions folder (and thus, all the endpoints in it) to the component of interest
