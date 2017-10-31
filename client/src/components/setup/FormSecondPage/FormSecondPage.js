@@ -13,7 +13,7 @@ class FormSecondPage extends Component {
             }
             else if (type === "radio") {
                 // For Fields with type "radio", we must wrap it around a label element for it to work
-                return <label><Field key={key} type={type} label={label} name={name} component={RenderField} value={value} /></label>
+                return <label key={key}><Field type={type} label={label} name={name} component={RenderField} value={value} /></label>
             }
         });
     }
