@@ -120,3 +120,8 @@ As for the front-end, our script will bundle all of our JS, CSS and HTML and han
 1) Bundling combines (or bundles) multiple files into a single file (i.e CSS bundles, JS bundles, etc). Fewer files means fewer HTTP requests to retrieve them, which means better page load performance.
 
 2) Minification removes white space and comments and shortens variables names. Saves space.
+
+## How do our reducers work?
+Every time a user makes a request (i.e route in either React or Express, or just about any API call such as action creators), Passport knows to deserialize the user's ID (remember, the ID is in the cookie in the browser) into a User model (We call our GetUserByID endpoint). Then, we call done(...) so that Passport knows to have the most updated User model under the req.user in our Express routes.
+
+Note that redux will always pre-load its data before calling componentDidMount, which is called after the first render.
