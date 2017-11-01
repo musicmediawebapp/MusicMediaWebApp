@@ -35,10 +35,20 @@ class Workflow extends Component {
             <div>
                 {/* Show the top part of the workflow, which shows the logo */}
                 <TopBar />
-                <div className="form">
-                    {page === 1 && <FormFirstPage onSubmit={this.nextPage} />}
-                    {page === 2 && <FormSecondPage previousPage={this.previousPage} onSubmit={this.nextPage} />}
-                    {page === 3 && <FormThirdPage previousPage={this.previousPage} />}
+                <div className="form row">
+                    <div className="col s3 logo-box">
+                        <i className="material-icons library-music">library_music</i>
+                        <div>
+                            <b>Create your account <br />
+                            in 2 simple steps</b>  <br />
+                            No credit card required.
+                        </div>
+                    </div>
+                    <div className="col s9">
+                        {page === 1 && <FormFirstPage onSubmit={this.nextPage} />}
+                        {page === 2 && <FormSecondPage previousPage={this.previousPage} onSubmit={this.nextPage} />}
+                        {page === 3 && <FormThirdPage previousPage={this.previousPage} />}
+                    </div>
                 </div>
             </div>
         );

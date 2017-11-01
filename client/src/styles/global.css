@@ -19,3 +19,4 @@
 :global(.pl-20p) { padding-left: 20% }
 :global(.p-20p) { padding: 20% }
 
+:global(.text-align-center) { text-align: center }
