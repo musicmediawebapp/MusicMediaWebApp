@@ -1,5 +1,7 @@
+/* This is a container for our form */
 .form {
-    max-width: 850px;
+    max-width: 750px;
     margin: 0 auto;
     background-color: white;
+    padding: 50px 10px;
 }
