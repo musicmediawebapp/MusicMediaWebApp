@@ -10,7 +10,7 @@ with negative -50vw margin. */
     margin-left: -50vw;
     margin-right: -50vw;
     /* This scales the background nicely with different browsers */
-    background-image: url('../../assets/404-error-page.jpg');
+    background-image: url('../../assets/404-error-page.png');
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;

@@ -10,7 +10,7 @@ import './App.css';
 // Component imports
 import Header from '../Header/Header'; // Will always show this header
 import Landing from '../Landing'; // Below header in the front page
-import Workflow from '../setup/Workflow';
+import Workflow from '../setup/Workflow/Workflow';
 import Error from '../Error/Error';
 import Dashboard from '../Dashboard/Dashboard';
 import Personal from '../Personal/Personal';
@@ -38,7 +38,6 @@ class App extends Component {
         this.setState({ hideHeader: false });
     }
 
-    
     render() { 
         return (
             <Router history={history}>
@@ -56,7 +55,7 @@ class App extends Component {
                         <Route exact path="/profile/:id" render={() => <Personal showHeader={this.showHeader} />} />
 
                         {/* This route is the setup workflow */}
-                        <Route exact path="/workflow" render={() => <Workflow showHeader={this.showHeader} />} />
+                        <Route exact path="/workflow" render={() => <Workflow showHeader={this.hideHeader} />} />
 
                         {/* This is for any explicit redirects to the Error page */}
                         <Route exact path="/error" render={() => <Error hideHeader={this.hideHeader} />} />

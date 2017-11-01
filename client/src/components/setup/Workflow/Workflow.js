@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import FormFirstPage from './FormFirstPage/FormFirstPage';
-import FormSecondPage from './FormSecondPage/FormSecondPage';
-import FormThirdPage from './FormThirdPage';
-import TopBar from './TopBar/TopBar';
+import FormFirstPage from '../FormFirstPage/FormFirstPage';
+import FormSecondPage from '../FormSecondPage/FormSecondPage';
+import FormThirdPage from '../FormThirdPage';
+import TopBar from '../TopBar/TopBar';
+import './Workflow.css';
 
 class Workflow extends Component {
     constructor(props) {
@@ -31,12 +32,14 @@ class Workflow extends Component {
     render() {
         var { page } = this.state;
         return(
-            <div className="container">
+            <div>
                 {/* Show the top part of the workflow, which shows the logo */}
                 <TopBar />
-                {page === 1 && <FormFirstPage onSubmit={this.nextPage} />}
-                {page === 2 && <FormSecondPage previousPage={this.previousPage} onSubmit={this.nextPage} />}
-                {page === 3 && <FormThirdPage previousPage={this.previousPage} />}
+                <div className="form">
+                    {page === 1 && <FormFirstPage onSubmit={this.nextPage} />}
+                    {page === 2 && <FormSecondPage previousPage={this.previousPage} onSubmit={this.nextPage} />}
+                    {page === 3 && <FormThirdPage previousPage={this.previousPage} />}
+                </div>
             </div>
         );
     }
