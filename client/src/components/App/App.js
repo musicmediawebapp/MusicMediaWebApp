@@ -5,6 +5,7 @@ import * as actions from '../../actions';
 import { Switch } from 'react-router';
 import history from '../../utils/History';
 import '../../styles/global.css';
+import './App.css';
 
 // Component imports
 import Header from '../Header/Header'; // Will always show this header
@@ -44,26 +45,24 @@ class App extends Component {
                 <div>
                     {/* Do not show the header when we're in the errors page */}
                     {this.state.hideHeader ? null : <Header />}
-                    <div className="container">
-                        <Switch>
-                            {/* The landing page users see when they're not logged in */}
-                            <Route exact path="/" render={() => <Landing showHeader={this.showHeader} />} />
+                    <Switch>
+                        {/* The landing page users see when they're not logged in */}
+                        <Route exact path="/" render={() => <Landing showHeader={this.showHeader} />} />
 
-                            {/* Once the user is logged in, all of the app's features and functionality is here */}
-                            <Route exact path="/dashboard" render={() => <Dashboard showHeader={this.showHeader} />} />
+                        {/* Once the user is logged in, all of the app's features and functionality is here */}
+                        <Route exact path="/dashboard" render={() => <Dashboard showHeader={this.showHeader} />} />
 
-                            {/* Users can look at their profile to update any personal information */}
-                            <Route exact path="/profile/:id" render={() => <Personal showHeader={this.showHeader} />} />
+                        {/* Users can look at their profile to update any personal information */}
+                        <Route exact path="/profile/:id" render={() => <Personal showHeader={this.showHeader} />} />
 
-                            {/* This route is the setup workflow */}
-                            <Route exact path="/workflow" render={() => <Workflow showHeader={this.showHeader} />} />
+                        {/* This route is the setup workflow */}
+                        <Route exact path="/workflow" render={() => <Workflow showHeader={this.showHeader} />} />
 
-                            {/* This is for any explicit redirects to the Error page */}
-                            <Route exact path="/error" render={() => <Error hideHeader={this.hideHeader} />} />
-                            {/* Handle the edgecase in which the user types in a random URL or an unhandled URL */}
-                            <Route exact path="*" render={() => <Error hideHeader={this.hideHeader} />} />
-                        </Switch>
-                    </div>
+                        {/* This is for any explicit redirects to the Error page */}
+                        <Route exact path="/error" render={() => <Error hideHeader={this.hideHeader} />} />
+                        {/* Handle the edgecase in which the user types in a random URL or an unhandled URL */}
+                        <Route exact path="*" render={() => <Error hideHeader={this.hideHeader} />} />
+                    </Switch>
                 </div>
             </Router>
         );
