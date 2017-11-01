@@ -15,9 +15,9 @@ class FormThirdPage extends Component {
         return (
             <div>
                 I'm ready to start!
-                <Button text="Previous" buttonStyles="orange btn-flat left white-text" handleOnClick={previousPage} />
+                <Button text="Previous" buttonStyles="orange btn-flat left white-text" type="button" handleOnClick={previousPage} />
                 <div onClick={() => submitWorkflow(formValues, history)}>
-                    <Button text="Next" buttonStyles="orange btn-flat right white-text" />
+                    <Button text="Next" buttonStyles="orange btn-flat right white-text" type="submit" />
                 </div>
             </div>
         );

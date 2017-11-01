@@ -28,7 +28,7 @@ class FormFirstPage extends Component {
             <div>
                 <form onSubmit={handleSubmit}>
                     {this.renderFields()}
-                    <Button text="Next" buttonStyles="orange btn-flat right white-text" />
+                    <Button text="Next" buttonStyles="orange btn-flat right white-text" type="submit" />
                 </form>
             </div>
         );

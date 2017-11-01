@@ -21,12 +21,11 @@ class FormSecondPage extends Component {
 
     render() {
         var { previousPage, handleSubmit } = this.props;
-        console.log(previousPage);
         return (
             <form onSubmit={handleSubmit}>
                 {this.renderFields()}
-                <Button text="Previous" buttonStyles="orange btn-flat left white-text" handleOnClick={previousPage} />
-                <Button text="Next" buttonStyles="orange btn-flat right white-text" />
+                <Button text="Previous" buttonStyles="orange btn-flat left white-text" type="button" handleOnClick={previousPage} />
+                <Button text="Next" buttonStyles="orange btn-flat right white-text" type="submit" />
             </form>
         );
     }
