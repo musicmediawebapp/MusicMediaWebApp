@@ -23,10 +23,10 @@ class FormSecondPage extends Component {
         return (
             <form onSubmit={handleSubmit}>
                 {this.renderFields()}
-                <button className="teal btn-flat left white-text" type="button" onClick={previousPage}>
+                <button className="orange btn-flat left white-text" type="button" onClick={previousPage}>
                     Previous
                 </button>
-                <button className="teal btn-flat right white-text" type="submit">
+                <button className="orange btn-flat right white-text" type="submit">
                     Next
                 <i className="material-icons right">done</i>
                 </button>

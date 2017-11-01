@@ -5,6 +5,7 @@ import formFields from './FormFields';
 import _ from 'lodash';
 import { fetchUser } from '../../../actions/index';
 import { connect } from 'react-redux';
+import Button from '../../../utils/Button/Button';
 
 class FormFirstPage extends Component {
     renderFields() {
@@ -27,10 +28,7 @@ class FormFirstPage extends Component {
             <div>
                 <form onSubmit={handleSubmit}>
                     {this.renderFields()}
-                    <button className="teal btn-flat right white-text" type="submit">
-                        Next
-                        <i className="material-icons right">done</i>
-                    </button>
+                    <Button text="Next" buttonStyles="orange btn-flat right white-text" />
                 </form>
             </div>
         );

@@ -14,10 +14,10 @@ class FormThirdPage extends Component {
         return (
             <div>
                 I'm ready to start!
-                <button className="teal btn-flat left white-text" type="button" onClick={previousPage}>
+                <button className="orange btn-flat left white-text" type="button" onClick={previousPage}>
                     Previous
                 </button>
-                <button className="teal btn-flat right white-text" onClick={() => submitWorkflow(formValues, history)}>
+                <button className="orange btn-flat right white-text" onClick={() => submitWorkflow(formValues, history)}>
                     Next
                     <i className="material-icons right">done</i>
                 </button>
