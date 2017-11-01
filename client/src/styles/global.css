@@ -3,3 +3,9 @@
 :global(.mr-0) { margin-right: 0px; }
 :global(.mb-0) { margin-bottom: 0px; }
 :global(.ml-0) { margin-left: 0px; }
+
+/* Padding 20% */
+:global(.pt-20p) { padding-top: 20% }
+:global(.pr-20p) { padding-right: 20% }
+:global(.pb-20p) { padding-bottom: 20% }
+:global(.pl-20p) { padding-left: 20% }
