@@ -3,9 +3,9 @@ import './Button.css';
 
 class Button extends Component {
     render() {
-        var { text, buttonStyles} = this.props;
+        var { text, buttonStyles, handleOnClick } = this.props;
         return (
-            <button className={buttonStyles} type="submit"> 
+            <button className={buttonStyles} type="submit" onClick={handleOnClick}> 
                 <span>{text}</span>
                 <i className="material-icons right">done</i>
             </button>
@@ -14,3 +14,4 @@ class Button extends Component {
 }
 
 export default Button;
+

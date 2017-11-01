@@ -4,6 +4,7 @@ import './FormSecondPage.css';
 import validate from '../../../utils/ValidateWorkflow';
 import _ from 'lodash';
 import FormFields from './FormFields';
+import Button from '../../../utils/Button/Button';
 
 class FormSecondPage extends Component {
     renderFields() {
@@ -20,16 +21,12 @@ class FormSecondPage extends Component {
 
     render() {
         var { previousPage, handleSubmit } = this.props;
+        console.log(previousPage);
         return (
             <form onSubmit={handleSubmit}>
                 {this.renderFields()}
-                <button className="orange btn-flat left white-text" type="button" onClick={previousPage}>
-                    Previous
-                </button>
-                <button className="orange btn-flat right white-text" type="submit">
-                    Next
-                <i className="material-icons right">done</i>
-                </button>
+                <Button text="Previous" buttonStyles="orange btn-flat left white-text" handleOnClick={previousPage} />
+                <Button text="Next" buttonStyles="orange btn-flat right white-text" />
             </form>
         );
     }
