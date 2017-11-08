@@ -3,3 +3,20 @@
 :global(.mr-0) { margin-right: 0px; }
 :global(.mb-0) { margin-bottom: 0px; }
 :global(.ml-0) { margin-left: 0px; }
+:global(.m-0) { margin: 0px; }
+
+/* Padding 30px */
+:global(.pt-30) { padding-top: 30px }
+:global(.pr-30) { padding-right: 30px }
+:global(.pb-30) { padding-bottom: 30px }
+:global(.pl-30) { padding-left: 30px }
+:global(.p-30) { padding: 30px }
+
+/* Padding 20% */
+:global(.pt-20p) { padding-top: 20% }
+:global(.pr-20p) { padding-right: 20% }
+:global(.pb-20p) { padding-bottom: 20% }
+:global(.pl-20p) { padding-left: 20% }
+:global(.p-20p) { padding: 20% }
+
+:global(.text-align-center) { text-align: center }

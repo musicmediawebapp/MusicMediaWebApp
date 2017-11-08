@@ -1,0 +1,32 @@
+/* Override Materialize's nav, making the nav thinner */
+nav {
+    line-height: 45px;
+    height: 45px;
+    background-color: white;
+}
+
+    /* The icon of our app */
+    nav a .library-music {
+        line-height: 45px;
+        height: 45px;
+        color: orange;
+        font-size: 30px;
+    }
+
+    nav ul a {
+        color: black;
+    }
+
+    /* On hover, change the border bottom of links */
+    nav ul li a:hover {
+        border-bottom: 2px solid orange;
+    }
+
+    /* All links in the header have this style */
+    nav ul li a {
+        padding: 0px 15px;
+        text-decoration:none;
+        transition: all 0.3s ease-in-out;
+        -webkit-transition: all 0.3s ease-in-out;
+        -moz-transition: all 0.3s ease-in-out;
+    }

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
 import { withRouter } from 'react-router-dom';
+import Button from '../../utils/Button/Button';
 
 class FormThirdPage extends Component {
     componentDidMount() {
@@ -14,13 +15,10 @@ class FormThirdPage extends Component {
         return (
             <div>
                 I'm ready to start!
-                <button className="teal btn-flat left white-text" type="button" onClick={previousPage}>
-                    Previous
-                </button>
-                <button className="teal btn-flat right white-text" onClick={() => submitWorkflow(formValues, history)}>
-                    Next
-                    <i className="material-icons right">done</i>
-                </button>
+                <Button text="Previous" buttonStyles="orange btn-flat left white-text" type="button" handleOnClick={previousPage} />
+                <div onClick={() => submitWorkflow(formValues, history)}>
+                    <Button text="Next" buttonStyles="orange btn-flat right white-text" type="submit" />
+                </div>
             </div>
         );
     }

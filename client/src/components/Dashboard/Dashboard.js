@@ -21,7 +21,7 @@ class Dashboard extends Component {
 
     render() {
         return (
-            <div>
+            <div className="container">
                 <h2>Dashboard</h2>
                 {completeWorkflowToast}
             </div>

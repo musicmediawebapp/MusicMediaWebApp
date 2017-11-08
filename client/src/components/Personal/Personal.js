@@ -79,7 +79,7 @@ class Personal extends Component {
 
     render() {
         return (
-            <div>
+            <div className="container">
                 <form onSubmit={this.submitForm.bind(this)}>
                     {this.renderFields()}
                     <Link to={'/dashboard'} className="teal btn-flat left white-text">

@@ -1,0 +1,21 @@
+/* This is a container for our form */
+.form {
+    max-width: 800px;
+    min-height: 400px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 50px 35px;
+    box-shadow: 0 0 2px 0 rgba(0,0,0,0.12), 0 2px 2px 0 rgba(0,0,0,0.12);
+    border-radius: 50px;
+}
+
+.library-music {
+    font-size: 70px;
+    color: orange;
+}
+
+/* This is the left side of the workflow, where we show the logo and some explainer text */
+.logo-box {
+    min-width: 70px; /* This is so when the screen resizes to a smaller one, our redux forms won't overlap */
+    line-height: 1.5;
+}

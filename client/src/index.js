@@ -8,7 +8,7 @@ import reduxThunk from 'redux-thunk';
 /* React DOM's whole purpose is to make sure React can be rendered on the DOM */
 import ReactDOM from 'react-dom';
 
-import App from './components/App';
+import App from './components/App/App';
 import reducers from './reducers';
 
 // Hooks up all reducers to the store

@@ -1,0 +1,7 @@
+.btn-flat {
+    border-radius: 25px;
+}
+
+button span {
+    text-transform: none;
+}
