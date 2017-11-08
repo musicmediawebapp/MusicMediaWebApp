@@ -3,7 +3,7 @@ import FormFirstPage from '../FormFirstPage/FormFirstPage';
 import FormSecondPage from '../FormSecondPage/FormSecondPage';
 import FormThirdPage from '../FormThirdPage';
 import TopBar from '../TopBar/TopBar';
-import s from './Workflow.css';
+import './Workflow.css';
 
 class Workflow extends Component {
     constructor(props) {
@@ -35,9 +35,9 @@ class Workflow extends Component {
             <div>
                 {/* Show the top part of the workflow, which shows the logo */}
                 <TopBar />
-                <div className={s.form + " row"}>
-                    <div className={s.logo_box + " col s3"}>
-                        <i className={s.library_music + " material-icons"}>library_music</i>
+                <div className="form row">
+                    <div className="logo-box col s3">
+                        <i className="library-music material-icons">library_music</i>
                         <div>
                             <b>Create your account <br />
                             in 2 simple steps</b>  <br />

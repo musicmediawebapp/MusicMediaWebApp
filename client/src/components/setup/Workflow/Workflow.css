@@ -1,5 +1,5 @@
 /* This is a container for our form */
-:local(.form) {
+.form {
     max-width: 800px;
     min-height: 400px;
     margin: 0 auto;
@@ -9,13 +9,13 @@
     border-radius: 50px;
 }
 
-:local(.library_music) {
+.library-music {
     font-size: 70px;
     color: orange;
 }
 
 /* This is the left side of the workflow, where we show the logo and some explainer text */
-:local(.logo_box) {
+.logo-box {
     min-width: 70px; /* This is so when the screen resizes to a smaller one, our redux forms won't overlap */
     line-height: 1.5;
 }
