@@ -1,7 +1,7 @@
 /* The idea here is: push the container to the exact middle of the 
 browser window with left: 50%;, then pull it back to the left edge 
 with negative -50vw margin. */
-.error-background {
+:local(.error_background) {
     height: 100vh;
     width: 100vw;
     position: relative;

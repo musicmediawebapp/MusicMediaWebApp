@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import './Header.css';
+import s from './Header.css';
 
 class Header extends Component {
     renderContent() {
@@ -37,7 +37,7 @@ class Header extends Component {
                     <Link 
                         to={user ? '/dashboard' : '/'}
                         className="left">
-                        <i className="material-icons library-music">library_music</i>
+                        <i className={s.library_music + " material-icons"}>library_music</i>
                     </Link>
                     <ul className="right">
                         {this.renderContent()}

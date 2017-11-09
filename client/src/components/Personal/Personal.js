@@ -10,6 +10,7 @@ import { withRouter } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
 import updateProfileToast from '../../utils/Toasts/default';
+import s from './Personal.css';
 
 class Personal extends Component {
     constructor(props) {
@@ -79,7 +80,7 @@ class Personal extends Component {
 
     render() {
         return (
-            <div className="container">
+            <div className={s.form}>
                 <form onSubmit={this.submitForm.bind(this)}>
                     {this.renderFields()}
                     <Link to={'/dashboard'} className="teal btn-flat left white-text">
