@@ -7,6 +7,13 @@ import { connect } from 'react-redux';
 import './Dashboard.css';
 
 class Dashboard extends Component {
+    constructor(props) {
+        super(props);
+
+        // Set music state to pause at the beginning of session
+        this.state = { isPlaying: false };
+        this.togglePlay = this.togglePlay.bind(this);    
+    }
 
     componentDidMount() {
         this.props.showHeader();
@@ -20,6 +27,12 @@ class Dashboard extends Component {
         }
     }
 
+    // Toggle playing state
+    togglePlay() {
+        var currentState = this.state.isPlaying;
+        this.setState({ isPlaying: !currentState });
+    }
+
     render() {
         return (
             <div className="container-bg">      
@@ -27,7 +40,7 @@ class Dashboard extends Component {
 
                 <div className="carousel-suggested-container-container">
                         <div className="carousel-suggested-container">
-                            <div className="background-gradient">
+                            <div className="background-gradient"> 
                                 <div className="song-player-container">
                                     <div className="artwork-wrapper">
                                         <img src={require('../../assets/album-temp.png')}/>
@@ -36,7 +49,10 @@ class Dashboard extends Component {
                                 <div className="username-title-container"> 
                                     <div className="track-title">Shipwreck - The Coast</div>
                                     <div className="track-username">testuser201</div>
-                                </div> 
+                                </div>
+                                    <div className="song-player">
+                                        <div onClick={this.togglePlay} className={"button " + (this.state.isPlaying ? 'play': 'pause')}></div>
+                                    </div> 
                                 <div>
                                     
                                 </div>
