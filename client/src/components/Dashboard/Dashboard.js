@@ -39,25 +39,34 @@ class Dashboard extends Component {
                 {completeWorkflowToast}
 
                 <div className="carousel-suggested-container-container">
-                        <div className="carousel-suggested-container">
-                            <div className="background-gradient"> 
-                                <div className="song-player-container">
-                                    <div className="artwork-wrapper">
-                                        <img src={require('../../assets/album-temp.png')}/>
-                                    </div>
+                    <div className="carousel-suggested-container">
+                        <div className="background-gradient"> 
+                            <div className="background-overlay"><span className="hide-overflow"></span></div>
+                            <div className="song-player-container">
+                                <div className="artwork-wrapper">
+                                    <img src={require('../../assets/album-temp.png')}/>
                                 </div>
                                 <div className="username-title-container"> 
                                     <div className="track-title">Shipwreck - The Coast</div>
                                     <div className="track-username">testuser201</div>
                                 </div>
-                                    <div className="song-player">
-                                        <div onClick={this.togglePlay} className={"button " + (this.state.isPlaying ? 'play': 'pause')}></div>
-                                    </div> 
-                                <div>
-                                    
+                                <div className="song-player">
+                                    <div onClick={this.togglePlay} className={"button " + (this.state.isPlaying ? 'play': 'pause')}></div>
+                                    <div className="controls">
+                                        <div id="current-time" className="time-fade">0:00</div>
+                                        <div id="total-time" className="time-fade">0:00</div>
+                                        <div id="slider-time">
+                                            <div className="progress"></div>
+                                        </div>
+                                    </div>
+                                </div> 
+                                <div className="song-info">
+                                    <div class="upload-time">3 months ago</div>
+                                    <div class="song-tags">#Pop</div>
                                 </div>
                             </div>
                         </div>
+                    </div>
                 </div>
             </div>
         );
