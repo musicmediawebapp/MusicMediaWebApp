@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import errorToast from '../../utils/Toasts/default';
-import './Error.css';
+import s from './Error.css';
 
 class Error extends Component {
     componentDidMount() {
@@ -17,7 +17,7 @@ class Error extends Component {
     
     render() {
         return (
-            <div className="error-background">
+            <div className={s.error_background}>
                 {errorToast}
             </div>
         );

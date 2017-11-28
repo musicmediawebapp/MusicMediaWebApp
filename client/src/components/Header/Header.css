@@ -6,7 +6,7 @@ nav {
 }
 
     /* The icon of our app */
-    nav a .library-music {
+    nav a :local(.library_music) {
         line-height: 45px;
         height: 45px;
         color: orange;
